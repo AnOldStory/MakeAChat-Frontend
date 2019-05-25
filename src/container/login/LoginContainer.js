@@ -7,8 +7,7 @@ class LoginContainer extends Component {
       id: "",
       password: "",
       token: "",
-      error: "",
-      isLogin: false
+      error: ""
     };
     this.handleLogin = this.handleLogin.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -38,8 +37,7 @@ class LoginContainer extends Component {
         switch (res.code) {
           case 200:
             this.setState({
-              token: res.token,
-              isLogin: true
+              token: res.token
             });
             this.props.handleToken({
               token: res.token,
@@ -70,26 +68,22 @@ class LoginContainer extends Component {
   render() {
     return (
       <div>
-        {this.state.isLogin === false ? (
-          <>
-            <input
-              type="text"
-              name="id"
-              onChange={this.handleChange}
-              value={this.state.id}
-            />
-            <input
-              name="password"
-              type="password"
-              onChange={this.handleChange}
-              value={this.state.password}
-            />
-            <button onClick={this.handleLogin}>로그인</button>
-            <div>{this.state.error}</div>
-          </>
-        ) : (
-          ""
-        )}
+        <>
+          <input
+            type="text"
+            name="id"
+            onChange={this.handleChange}
+            value={this.state.id}
+          />
+          <input
+            name="password"
+            type="password"
+            onChange={this.handleChange}
+            value={this.state.password}
+          />
+          <button onClick={this.handleLogin}>로그인</button>
+          <div>{this.state.error}</div>
+        </>
       </div>
     );
   }

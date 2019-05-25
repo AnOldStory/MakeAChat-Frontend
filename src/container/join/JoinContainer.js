@@ -7,8 +7,7 @@ class JoinContainer extends Component {
       id: "",
       password: "",
       nickname: "",
-      error: "",
-      isSignup: false
+      error: ""
     };
     this.handleSignup = this.handleSignup.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -38,9 +37,6 @@ class JoinContainer extends Component {
         console.log(this.props);
         switch (res.code) {
           case 200:
-            this.setState({
-              isSignup: true
-            });
             this.props.routeMethod.history.push("/login");
             break;
           case 400:
@@ -70,37 +66,33 @@ class JoinContainer extends Component {
   render() {
     return (
       <div>
-        {this.state.isSignup === false ? (
-          <>
-            <input
-              name="id"
-              type="text"
-              onChange={this.handleChange}
-              value={this.state.id}
-              placeholder="아이디"
-            />
+        <>
+          <input
+            name="id"
+            type="text"
+            onChange={this.handleChange}
+            value={this.state.id}
+            placeholder="아이디"
+          />
 
-            <input
-              name="password"
-              type="password"
-              onChange={this.handleChange}
-              value={this.state.password}
-              placeholder="비밀번호"
-            />
+          <input
+            name="password"
+            type="password"
+            onChange={this.handleChange}
+            value={this.state.password}
+            placeholder="비밀번호"
+          />
 
-            <input
-              name="nickname"
-              type="text"
-              onChange={this.handleChange}
-              value={this.state.nickname}
-              placeholder="닉네임"
-            />
-            <button onClick={this.handleSignup}>회원가입</button>
-            <div>{this.state.error}</div>
-          </>
-        ) : (
-          ""
-        )}
+          <input
+            name="nickname"
+            type="text"
+            onChange={this.handleChange}
+            value={this.state.nickname}
+            placeholder="닉네임"
+          />
+          <button onClick={this.handleSignup}>회원가입</button>
+          <div>{this.state.error}</div>
+        </>
       </div>
     );
   }

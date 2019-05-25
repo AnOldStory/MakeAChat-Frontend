@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import io from "socket.io-client";
 
+import LoginLink from "component/LoginLink";
+
 class MainContainer extends Component {
   constructor(props) {
     super(props);
@@ -75,7 +77,10 @@ class MainContainer extends Component {
             <div className="err">{this.state.err}</div>
           </div>
         ) : (
-          "로그인시 채팅이 가능합니다."
+          <>
+            로그인이 필요합니다.
+            <LoginLink />
+          </>
         )}
       </div>
     );

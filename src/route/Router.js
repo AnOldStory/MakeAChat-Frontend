@@ -42,14 +42,10 @@ class Router extends Component {
               />
             )}
           />
-          {this.state.token !== "" ? (
-            <Route
-              path="/chat"
-              component={() => <ChatContainer token={this.state.token} />}
-            />
-          ) : (
-            ""
-          )}
+          <Route
+            path="/chat"
+            component={() => <ChatContainer token={this.state.token} />}
+          />
         </Switch>
       </BrowserRouter>
     );
