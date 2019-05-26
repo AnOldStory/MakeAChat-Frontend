@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import config from "_variable";
+
 class JoinContainer extends Component {
   constructor(props) {
     super(props);
@@ -19,7 +21,7 @@ class JoinContainer extends Component {
       password: this.state.password,
       nickname: this.state.nickname
     };
-    fetch("http://localhost:3001/api/users/signup", {
+    fetch(config.serverUrl + "/api/users/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded"
@@ -33,8 +35,6 @@ class JoinContainer extends Component {
     })
       .then(res => res.json())
       .then(res => {
-        console.log(res);
-        console.log(this.props);
         switch (res.code) {
           case 200:
             this.props.routeMethod.history.push("/login");

@@ -5,6 +5,7 @@ import MainContainer from "container/main/MainContainer";
 import JoinContainer from "container/join/JoinContainer";
 import LoginContainer from "container/login/LoginContainer";
 import ChatContainer from "container/chat/ChatContainer";
+import PrivateChatContainer from "container/privatechat/PrivateChatContainer";
 
 class Router extends Component {
   constructor(props) {
@@ -43,8 +44,26 @@ class Router extends Component {
             )}
           />
           <Route
+            exact
             path="/chat"
-            component={() => <ChatContainer token={this.state.token} />}
+            component={routeMethod => (
+              <ChatContainer
+                routeMethod={routeMethod}
+                token={this.state.token}
+                nickname={this.state.nickname}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/privatechat"
+            component={routeMethod => (
+              <PrivateChatContainer
+                routeMethod={routeMethod}
+                token={this.state.token}
+                nickname={this.state.nickname}
+              />
+            )}
           />
         </Switch>
       </BrowserRouter>

@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import config from "_variable";
+
 class LoginContainer extends Component {
   constructor(props) {
     super(props);
@@ -18,7 +20,7 @@ class LoginContainer extends Component {
       username: this.state.id,
       password: this.state.password
     };
-    fetch("http://localhost:3001/api/users/login", {
+    fetch(config.serverUrl + "/api/users/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded"
@@ -32,8 +34,6 @@ class LoginContainer extends Component {
     })
       .then(res => res.json())
       .then(res => {
-        console.log(res);
-        console.log(this.props);
         switch (res.code) {
           case 200:
             this.setState({
