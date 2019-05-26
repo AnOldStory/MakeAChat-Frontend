@@ -24,9 +24,11 @@ class ChatContainer extends Component {
   }
 
   componentDidMount() {
+    console.log("Global Login");
     /* check global connection */
     this.socket = io.connect(this.state.serverUrl, {
-      transports: ["websocket"]
+      transports: ["websocket"],
+      forceNew: true
     });
     /* subscribe chat-pull */
     this.socket.on("chat-pull", this.handleResponse);

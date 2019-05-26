@@ -17,7 +17,6 @@ class PrivateChatConatiner extends Component {
       who: "",
       lists: [],
       chats: {},
-      nicknameList: [],
       target: ""
     };
     this.handlePush = this.handlePush.bind(this);
@@ -32,9 +31,11 @@ class PrivateChatConatiner extends Component {
   }
 
   componentDidMount() {
+    console.log("Private Login");
     /* private-msg */
     this.socket = io(this.state.serverUrl + "/private-msg", {
-      transports: ["websocket"]
+      transports: ["websocket"],
+      forceNew: true
     });
     /* subscribe chat-pull */
     this.socket.on("chat-pull", this.handleResponse);
@@ -45,7 +46,7 @@ class PrivateChatConatiner extends Component {
     this.socket.emit(
       "get-chat-list",
       JSON.stringify({
-        token: this.state.token
+        token: this.props.token
       })
     );
   }
@@ -134,6 +135,16 @@ class PrivateChatConatiner extends Component {
     if (msg["code"] === 200) {
       let result = this.state.chats;
       if (msg) {
+        if (!result[msg.from]) {
+          let lists = this.state.lists;
+          lists.push(msg.from);
+          this.setState({
+            lists: lists
+          });
+          result[msg.from] = [
+            { nickname: "시스템", text: "채팅의 시작입니다." }
+          ];
+        }
         result[msg.from].push(msg);
       }
       this.setState({
@@ -190,14 +201,16 @@ class PrivateChatConatiner extends Component {
           <>
             <div onClick={this.handleMove}> 공용 공간으로 가기 </div>
             안녕하세요 {this.state.nickname}님 개인 채팅 공간
-            <div>누구랑? {this.state.target}</div>
+            <div>현재 대화 상대 : {this.state.target}</div>
+            ===한번이라도 채팅해본적 있는 닉네임===
             <div className="chat-list">
               {this.state.lists.map((msg, i) => {
                 return <div key={i}>who {msg}</div>;
               })}
             </div>
-            채팅리스트끝
+            ====닉네임 리스트 끝 ====
             <div className="chat-send">
+              ====채팅 시작====
               {this.state.target !== ""
                 ? this.state.chats[this.state.target].map((msg, i) => {
                     return (
@@ -214,6 +227,7 @@ class PrivateChatConatiner extends Component {
               />
               <button onClick={this.handlePush}>채팅보내기</button>
             </div>
+            ===채팅 끝 ===
             <div className="err">{this.state.err}</div>
             <input
               name="who"
