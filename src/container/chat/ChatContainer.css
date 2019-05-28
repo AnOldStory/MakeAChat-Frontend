@@ -22,6 +22,30 @@
   width: 120px;
   height: 540px;
   background: #eee;
+  overflow-y: scroll;
+}
+
+.chat_all .list_area .user {
+  font-size: 1.2em;
+  font-weight: bold;
+  text-shadow: 0 0 2px #000000;
+  color: white;
+  width: 120px;
+  height: 20px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  text-align: center;
+  background: #848484;
+}
+
+.chat_all .list_area .list {
+  width: 110px;
+  height: 20px;
+  padding-top: 7px;
+  padding-left: 7px;
+  border-style: solid;
+  border-width: 1px;
+  border-top: 0px;
 }
 
 .chat_all .chat_main {
@@ -50,6 +74,35 @@
   margin-right: 5px;
 }
 
+.chat_all .chat_main .message_area .nickname {
+  clear: both;
+}
+
+.chat_all .chat_main .message_area .text {
+  color: white;
+  background-color: #848484;
+  text-shadow: 0 0 2px #000000;
+  border: solid;
+  border-width: 1.5px;
+  padding: 5px 10px 5px 10px;
+  clear: both;
+}
+
+.chat_all .chat_main .time {
+  font-size: 5px;
+  margin-top: 17px;
+}
+
+.chat_all .chat_main .message_area .other {
+  float: left;
+  margin-left: 10px;
+}
+
+.chat_all .chat_main .message_area .me {
+  float: right;
+  margin-right: 10px;
+}
+
 .chat_all .chat_main .input_box {
   float: left;
 }
@@ -63,6 +116,7 @@
 input {
   width: 655px;
   height: 115px;
+  line-height: 115px;
 }
 
 button {
@@ -108,4 +162,8 @@ button:hover:before,
 button:hover:after {
   width: 100%;
   transition: 800ms ease all;
+}
+
+.messagesEnd {
+  float: left;
 }

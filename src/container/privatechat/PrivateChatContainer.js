@@ -196,52 +196,66 @@ class PrivateChatConatiner extends Component {
 
   render() {
     return (
-      <div>
-        {this.state.token ? (
-          <>
-            <div onClick={this.handleMove}> 공용 공간으로 가기 </div>
-            안녕하세요 {this.state.nickname}님 개인 채팅 공간
-            <div>현재 대화 상대 : {this.state.target}</div>
-            ===한번이라도 채팅해본적 있는 닉네임===
-            <div className="chat-list">
-              {this.state.lists.map((msg, i) => {
-                return <div key={i}>who {msg}</div>;
-              })}
-            </div>
-            ====닉네임 리스트 끝 ====
-            <div className="chat-send">
-              ====채팅 시작====
-              {this.state.target !== ""
-                ? this.state.chats[this.state.target].map((msg, i) => {
-                    return (
-                      <div key={i}>
-                        {msg.nickname} : {msg.text}
-                      </div>
-                    );
-                  })
-                : ""}
-              <input
-                name="text"
-                onChange={this.handleTyping}
-                value={this.state.text}
-              />
-              <button onClick={this.handlePush}>채팅보내기</button>
-            </div>
-            ===채팅 끝 ===
+      <div className="chat_all">
+        <div className="header">Make A Chat</div>
+        <div className="list_area">
+          <div className="chat-list">
+            {this.state.lists.map((msg, i) => {
+              return <div key={i}>who {msg}</div>;
+            })}
             <div className="err">{this.state.err}</div>
             <input
               name="who"
               onChange={this.handleTyping}
               value={this.state.who}
+              className="search_box"
             />
-            <button onClick={this.handleValid}>닉네임 검색</button>
-          </>
-        ) : (
-          <>
-            로그인이 필요합니다.
-            <LoginLink />
-          </>
-        )}
+            <button className="search" onClick={this.handleValid}>
+              다른사람찾기
+            </button>
+          </div>
+        </div>
+        <div className="chat_main">
+          <div className="message_area">
+            <div>
+              안녕하세요 {this.state.nickname}님 개인 채팅 공간
+              <div>현재 대화 상대 : {this.state.target}</div>
+              <span className="leave">
+                <button type="button" name="button1" onClick={this.handleMove}>
+                  공용 공간으로 가기
+                </button>
+              </span>
+            </div>
+
+            {this.state.target !== "" && this.state.token ? (
+              this.state.chats[this.state.target].map((msg, i) => {
+                return (
+                  <div key={i}>
+                    {msg.nickname} : {msg.text}
+                  </div>
+                );
+              })
+            ) : (
+              <>
+                로그인이 필요합니다.
+                <LoginLink />
+              </>
+            )}
+            <div className="other">ggggg : ㅎㅇㅎㅇ</div>
+            <div className="me">12345 : 1212</div>
+          </div>
+          <div className="input_box">
+            <input
+              type="text"
+              id="text_input"
+              onChange={this.handleTyping}
+              value={this.state.text}
+            />
+          </div>
+          <button type="button" name="button2" onClick={this.handlePush}>
+            SEND
+          </button>
+        </div>
       </div>
     );
   }

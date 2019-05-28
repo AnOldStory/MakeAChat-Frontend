@@ -109,7 +109,12 @@ class ChatContainer extends Component {
     return (
       <div className="chat_all">
         <div className="header">Make A Chat</div>
-        <div className="list_area" />
+        <div className="list_area">
+          <div className="list_area">
+            <div className="user">user</div>
+            <div className="list">qwer</div>
+          </div>
+        </div>
         <div className="chat_main">
           <div className="message_area">
             <span className="leave">
@@ -120,13 +125,70 @@ class ChatContainer extends Component {
             {this.state.token ? (
               <>
                 안녕하세요 {this.state.nickname}님 여기는 공용 채팅 공간입니다.
-                {this.state.chats.map((msg, i) => {
-                  return (
+                {this.state.chats.reduce((result, msg, i, initial) => {
+                  return [
+                    ...result,
                     <div key={i}>
-                      {msg.nickname} : {msg.text}
+                      {initial[i - 1] &&
+                      msg.nickname !== initial[i - 1].nickname ? (
+                        <div
+                          className={
+                            "nickname " +
+                            (msg.nickname === this.state.nickname
+                              ? "me"
+                              : "other")
+                          }
+                        >
+                          {msg.nickname}
+                        </div>
+                      ) : (
+                        ""
+                      )}
+                      <div
+                        className={
+                          "text " +
+                          (msg.nickname === this.state.nickname
+                            ? "me"
+                            : "other")
+                        }
+                      >
+                        {msg.text}
+                      </div>
+                      <div
+                        className={
+                          "time " +
+                          (msg.nickname === this.state.nickname
+                            ? "me"
+                            : "other")
+                        }
+                      >
+                        {msg.time
+                          .replace(/T|:|\./g, "-")
+                          .split("-")
+                          .reduce((init, now, index) => {
+                            switch (index) {
+                              case 1:
+                                return init.substring(2) + "." + now;
+                              case 2:
+                                return init + "." + now;
+                              case 3:
+                                return init + " " + now;
+                              case 4:
+                                return init + ":" + now;
+                              default:
+                                return init;
+                            }
+                          })}
+                      </div>
                     </div>
-                  );
-                })}
+                  ];
+                }, [])}
+                <div
+                  className="messagesEnd"
+                  ref={el => {
+                    this.messagesEnd = el;
+                  }}
+                />
               </>
             ) : (
               <>
@@ -134,12 +196,6 @@ class ChatContainer extends Component {
                 <LoginLink />
               </>
             )}
-
-            <div
-              ref={el => {
-                this.messagesEnd = el;
-              }}
-            />
           </div>
 
           <div className="input_box">
