@@ -16,7 +16,8 @@ class ChatContainer extends Component {
       serverUrl: config.serverUrl,
       text: "",
       err: "",
-      chats: []
+      chats: [],
+      members: []
     };
     this.handlePush = this.handlePush.bind(this);
     this.handleResponse = this.handleResponse.bind(this);
@@ -24,6 +25,9 @@ class ChatContainer extends Component {
     this.handleTyping = this.handleTyping.bind(this);
     this.handleMove = this.handleMove.bind(this);
     this.handleEnter = this.handleEnter.bind(this);
+    this.handleMemberIn = this.handleMemberIn.bind(this);
+    this.handleMemberOut = this.handleMemberOut.bind(this);
+    this.handleMember = this.handleMember.bind(this);
   }
 
   componentDidMount() {
@@ -37,7 +41,16 @@ class ChatContainer extends Component {
       /* subscribe chat-pull */
       this.socket.on("chat-pull", this.handleResponse);
       this.socket.on("err-pull", this.handleResponseErr);
-      this.socket.emit("get-chat-list");
+      this.socket.on("member-in", this.handleMemberIn);
+      this.socket.on("member-out", this.handleMemberOut);
+      this.socket.on("member-list", this.handleMember);
+      this.socket.emit(
+        "get-chat-list",
+        JSON.stringify({
+          token: this.props.token
+        })
+      );
+      this.socket.emit("get-member-list");
     }
   }
 
@@ -105,6 +118,72 @@ class ChatContainer extends Component {
     }
   }
 
+  handleMemberIn(msg) {
+    if (msg["code"] === 200) {
+      let result = this.state.chats;
+      let info = {
+        text: msg.nickname + "님이 입장하셨습니다.",
+        nickname: "시스템",
+        time: "system"
+      };
+      result.push(info);
+      let members = this.state.members;
+      members.push(msg.nickname);
+      this.setState({
+        chats: result,
+        members: members,
+        err: ""
+      });
+    } else {
+      this.setState({
+        err: "예상치 못한 오류가 발생하였습니다. 서버 연결을 확인해주세요."
+      });
+    }
+    if (this.messagesEnd) {
+      this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+    }
+  }
+
+  handleMemberOut(msg) {
+    if (msg["code"] === 200) {
+      let result = this.state.chats;
+      let info = {
+        text: msg.nickname + "님이 퇴장하셨습니다.",
+        nickname: "시스템",
+        time: "system"
+      };
+      result.push(info);
+      let members = this.state.members;
+      members.splice(members.indexOf(msg.nickname), 1);
+
+      this.setState({
+        chats: result,
+        members: members,
+        err: ""
+      });
+    } else {
+      this.setState({
+        err: "예상치 못한 오류가 발생하였습니다. 서버 연결을 확인해주세요."
+      });
+    }
+    if (this.messagesEnd) {
+      this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+    }
+  }
+
+  handleMember(msg) {
+    console.log(msg);
+    if (msg["code"] === 200) {
+      this.setState({
+        members: msg.members
+      });
+    } else {
+      this.setState({
+        err: "예상치 못한 오류가 발생하였습니다. 서버 연결을 확인해주세요."
+      });
+    }
+  }
+
   render() {
     return (
       <div className="chat_all">
@@ -112,7 +191,11 @@ class ChatContainer extends Component {
         <div className="list_area">
           <div className="list_area">
             <div className="user">user</div>
-            <div className="list">qwer</div>
+            {this.state.members.map((name, i) => (
+              <div className="list" key={i}>
+                {name}
+              </div>
+            ))}
           </div>
         </div>
         <div className="chat_main">
@@ -168,7 +251,11 @@ class ChatContainer extends Component {
                           .reduce((init, now, index) => {
                             switch (index) {
                               case 1:
-                                return init.substring(2) + "." + now;
+                                if (init === "system") {
+                                  return "";
+                                } else {
+                                  return init.substring(2) + "." + now;
+                                }
                               case 2:
                                 return init + "." + now;
                               case 3:
