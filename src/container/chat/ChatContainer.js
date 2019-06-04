@@ -108,7 +108,9 @@ class ChatContainer extends Component {
   }
 
   handleMove() {
-    this.socket.close();
+    if (this.state.token) {
+      this.socket.close();
+    }
     this.props.routeMethod.history.push("/privatechat");
   }
 
@@ -186,25 +188,25 @@ class ChatContainer extends Component {
 
   render() {
     return (
-      <div className="chat_all">
-        <div className="header">Make A Chat</div>
-        <div className="list_area">
-          <div className="list_area">
-            <div className="user">user</div>
-            {this.state.members.map((name, i) => (
-              <div className="list" key={i}>
-                {name}
-              </div>
-            ))}
-          </div>
+      <div className="g_chat_all">
+        <div className="g_header">
+          Make A Chat
+          <span className="g_leave">
+            <button type="button" name="g_button1" onClick={this.handleMove}>
+              Go to Personal Room
+            </button>
+          </span>
         </div>
-        <div className="chat_main">
-          <div className="message_area">
-            <span className="leave">
-              <button type="button" name="button1" onClick={this.handleMove}>
-                Go to Personal Room
-              </button>
-            </span>
+        <div className="g_list_area">
+          <div className="g_user">user</div>
+          {this.state.members.map((name, i) => (
+            <div className="g_list" key={i}>
+              {name}
+            </div>
+          ))}
+        </div>
+        <div className="g_chat_main">
+          <div className="g_message_area">
             {this.state.token ? (
               <>
                 안녕하세요 {this.state.nickname}님 여기는 공용 채팅 공간입니다.
@@ -216,10 +218,10 @@ class ChatContainer extends Component {
                       msg.nickname !== initial[i - 1].nickname ? (
                         <div
                           className={
-                            "nickname " +
+                            "g_nickname " +
                             (msg.nickname === this.state.nickname
-                              ? "me"
-                              : "other")
+                              ? "g_me"
+                              : "g_other")
                           }
                         >
                           {msg.nickname}
@@ -229,20 +231,20 @@ class ChatContainer extends Component {
                       )}
                       <div
                         className={
-                          "text " +
+                          "g_text " +
                           (msg.nickname === this.state.nickname
-                            ? "me"
-                            : "other")
+                            ? "g_me"
+                            : "g_other")
                         }
                       >
                         {msg.text}
                       </div>
                       <div
                         className={
-                          "time " +
+                          "g_time " +
                           (msg.nickname === this.state.nickname
-                            ? "me"
-                            : "other")
+                            ? "g_me"
+                            : "g_other")
                         }
                       >
                         {msg.time
@@ -285,18 +287,20 @@ class ChatContainer extends Component {
             )}
           </div>
 
-          <div className="input_box">
+          <div className="g_bottom_area">
             <input
               type="text"
-              id="text_input"
+              id="g_text_input"
               onChange={this.handleTyping}
               value={this.state.text}
               onKeyDown={this.handleEnter}
             />
+            <div className="g_send_area">
+              <button type="button" name="g_button2" onClick={this.handlePush}>
+                SEND
+              </button>
+            </div>
           </div>
-          <button type="button" name="button2" onClick={this.handlePush}>
-            SEND
-          </button>
           <div className="err">{this.state.err}</div>
         </div>
       </div>

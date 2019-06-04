@@ -3,6 +3,8 @@ import io from "socket.io-client";
 
 import LoginLink from "component/LoginLink";
 
+import "./PrivateChatContainer.css";
+
 import config from "_variable";
 
 class PrivateChatConatiner extends Component {
@@ -19,8 +21,10 @@ class PrivateChatConatiner extends Component {
       chats: {},
       target: ""
     };
+    this.handleEnter = this.handleEnter.bind(this);
     this.handlePush = this.handlePush.bind(this);
     this.handleValid = this.handleValid.bind(this);
+    this.handleButtonValid = this.handleButtonValid.bind(this);
     this.handleResponse = this.handleResponse.bind(this);
     this.handleResponseErr = this.handleResponseErr.bind(this);
     this.handleResponseList = this.handleResponseList.bind(this);
@@ -31,24 +35,32 @@ class PrivateChatConatiner extends Component {
   }
 
   componentDidMount() {
-    console.log("Private Login");
-    /* private-msg */
-    this.socket = io(this.state.serverUrl + "/private-msg", {
-      transports: ["websocket"],
-      forceNew: true
-    });
-    /* subscribe chat-pull */
-    this.socket.on("chat-pull", this.handleResponse);
-    this.socket.on("err-pull", this.handleResponseErr);
-    this.socket.on("list-pull", this.handleResponseList);
-    this.socket.on("alarm-pull", this.handleResponseAlarm);
-    this.socket.on("valid-pull", this.handleResponseValid);
-    this.socket.emit(
-      "get-chat-list",
-      JSON.stringify({
-        token: this.props.token
-      })
-    );
+    if (this.state.token) {
+      console.log("Private Login");
+      /* private-msg */
+      this.socket = io(this.state.serverUrl + "/private-msg", {
+        transports: ["websocket"],
+        forceNew: true
+      });
+      /* subscribe chat-pull */
+      this.socket.on("chat-pull", this.handleResponse);
+      this.socket.on("err-pull", this.handleResponseErr);
+      this.socket.on("list-pull", this.handleResponseList);
+      this.socket.on("alarm-pull", this.handleResponseAlarm);
+      this.socket.on("valid-pull", this.handleResponseValid);
+      this.socket.emit(
+        "get-chat-list",
+        JSON.stringify({
+          token: this.props.token
+        })
+      );
+    }
+  }
+
+  handleEnter(e) {
+    if (e.key === "Enter" && this.state.token) {
+      this.handlePush();
+    }
   }
 
   handlePush() {
@@ -77,6 +89,20 @@ class PrivateChatConatiner extends Component {
     );
   }
 
+  handleButtonValid(e) {
+    this.setState({
+      who: e.target.name
+    });
+
+    this.socket.emit(
+      "get-valid",
+      JSON.stringify({
+        token: this.state.token,
+        nickname: e.target.name
+      })
+    );
+  }
+
   handleResponse(msg) {
     if (msg["code"] === 200) {
       let result = this.state.chats;
@@ -88,6 +114,9 @@ class PrivateChatConatiner extends Component {
         chats: result,
         err: ""
       });
+      if (this.messagesEnd) {
+        this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+      }
     } else {
       this.setState({
         err: "예상치 못한 오류가 발생하였습니다. 서버 연결을 확인해주세요."
@@ -158,7 +187,7 @@ class PrivateChatConatiner extends Component {
       let result = this.state.chats;
       if (!result[this.state.who]) {
         result[this.state.who] = [
-          { nickname: "시스템", text: "채팅의 시작입니다." }
+          { nickname: "시스템", text: "채팅의 시작입니다.", time: "system" }
         ];
         this.setState({
           chats: result,
@@ -190,71 +219,149 @@ class PrivateChatConatiner extends Component {
   }
 
   handleMove() {
-    this.socket.close();
+    if (this.state.token) {
+      this.socket.close();
+    }
     this.props.routeMethod.history.push("/chat");
   }
 
   render() {
     return (
-      <div className="chat_all">
-        <div className="header">Make A Chat</div>
-        <div className="list_area">
-          <div className="chat-list">
-            {this.state.lists.map((msg, i) => {
-              return <div key={i}>who {msg}</div>;
-            })}
-            <div className="err">{this.state.err}</div>
+      <div className="p_chat_all">
+        <div className="p_header">
+          Make A Chat
+          <div className="p_leave">
+            <button type="button" name="p_button1" onClick={this.handleMove}>
+              Go to Group Room
+            </button>
+          </div>
+        </div>
+        <div className="p_list_area">
+          <div className="p_user_area">
+            <div className="p_user">user</div>
+            {this.state.lists.map((msg, i) => (
+              <div className="p_user_list" key={i}>
+                <button name={msg} onClick={this.handleButtonValid}>
+                  {msg}
+                </button>
+              </div>
+            ))}
+          </div>
+          <div className="p_search">
             <input
               name="who"
               onChange={this.handleTyping}
               value={this.state.who}
-              className="search_box"
             />
-            <button className="search" onClick={this.handleValid}>
-              다른사람찾기
-            </button>
+            <button onClick={this.handleValid}>SEARCH</button>
           </div>
         </div>
-        <div className="chat_main">
-          <div className="message_area">
-            <div>
-              안녕하세요 {this.state.nickname}님 개인 채팅 공간
-              <div>현재 대화 상대 : {this.state.target}</div>
-              <span className="leave">
-                <button type="button" name="button1" onClick={this.handleMove}>
-                  공용 공간으로 가기
-                </button>
-              </span>
-            </div>
-
-            {this.state.target !== "" && this.state.token ? (
-              this.state.chats[this.state.target].map((msg, i) => {
-                return (
-                  <div key={i}>
-                    {msg.nickname} : {msg.text}
-                  </div>
-                );
-              })
+        <div className="p_chat_main">
+          <div className="p_message_area">
+            {this.state.token ? (
+              this.state.target !== "" ? (
+                <>
+                  <div>안녕하세요 {this.state.nickname}님 개인 채팅 공간</div>
+                  <div>현재 대화 상대 : {this.state.target}</div>
+                  {this.state.chats[this.state.target].reduce(
+                    (result, msg, i, initial) => {
+                      return [
+                        ...result,
+                        <div key={i}>
+                          {initial[i - 1] &&
+                          msg.nickname !== initial[i - 1].nickname ? (
+                            <div
+                              className={
+                                "p_nickname " +
+                                (msg.nickname === this.state.nickname
+                                  ? "p_me"
+                                  : "p_other")
+                              }
+                            >
+                              {msg.nickname}
+                            </div>
+                          ) : (
+                            ""
+                          )}
+                          <div
+                            className={
+                              "p_text " +
+                              (msg.nickname === this.state.nickname
+                                ? "p_me"
+                                : "p_other")
+                            }
+                          >
+                            {msg.text}
+                          </div>
+                          <div
+                            className={
+                              "p_time " +
+                              (msg.nickname === this.state.nickname
+                                ? "p_me"
+                                : "p_other")
+                            }
+                          >
+                            {msg.time
+                              .replace(/T|:|\./g, "-")
+                              .split("-")
+                              .reduce((init, now, index) => {
+                                switch (index) {
+                                  case 1:
+                                    if (init === "system") {
+                                      return "";
+                                    } else {
+                                      return init.substring(2) + "." + now;
+                                    }
+                                  case 2:
+                                    return init + "." + now;
+                                  case 3:
+                                    return init + " " + now;
+                                  case 4:
+                                    return init + ":" + now;
+                                  default:
+                                    return init;
+                                }
+                              })}
+                          </div>
+                        </div>
+                      ];
+                    },
+                    []
+                  )}
+                </>
+              ) : (
+                "대화할 상대를 골라주세요."
+              )
             ) : (
               <>
                 로그인이 필요합니다.
                 <LoginLink />
               </>
             )}
-            <div className="other">ggggg : ㅎㅇㅎㅇ</div>
-            <div className="me">12345 : 1212</div>
+            <div
+              className="messagesEnd"
+              ref={el => {
+                this.messagesEnd = el;
+              }}
+            />
           </div>
-          <div className="input_box">
+
+          <div className="p_bottom_area">
             <input
               type="text"
+              name="text"
               id="text_input"
               onChange={this.handleTyping}
               value={this.state.text}
+              onKeyDown={this.handleEnter}
             />
+            <div className="p_send_area">
+              <button type="button" name="p_button2" onClick={this.handlePush}>
+                SEND
+              </button>
+            </div>
           </div>
-          <button type="button" name="button2" onClick={this.handlePush}>
-            SEND
-          </button>
+          <div className="err">{this.state.err}</div>
         </div>
       </div>
     );

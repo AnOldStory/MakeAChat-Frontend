@@ -1,105 +1,56 @@
-.chat_all {
-  list-style: none;
-  width: 900px;
-  height: 600px;
-  position: relative;
-  background: red;
+* {
+  margin: 0;
+  padding: 0;
 }
 
-.chat_all .header {
+.p_chat_all {
+  list-style: none;
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  background: white;
+  overflow: hidden;
+}
+
+.p_chat_all .p_header {
   font-size: 1.3em;
   font-weight: bold;
-  width: 900px;
-  height: 60px;
-  background: #000080;
+  width: 100%;
+  height: 10vh;
+  background: linear-gradient(to right bottom, #0B0B3B, #000080);
   color: white;
   text-align: center;
-  line-height: 60px;
+  line-height: 10vh;
+  position: relative;
 }
 
-.chat_all .list_area {
-  float: left;
-  width: 120px;
-  height: 540px;
-  background: #eee;
-}
-
-.chat_all .chat_main {
+.p_chat_all .p_header .p_leave {
   float: right;
-  width: 780px;
-  height: 540px;
-  background: white;
+  height: 10vh;
   position: relative;
 }
 
-.chat_all .chat_main .message_area {
-  width: 780px;
-  height: 420px;
-  position: relative;
-  z-index: 1;
-}
+.p_chat_all .p_header .p_leave>button {
+  width: 10em;
+  font-size: 0.8em;
 
-.chat_all .chat_main .message_area .leave {
-  width: 200px;
-  height: 40px;
-  float: right;
-  z-index: 2;
-  position: relative;
-  margin-top: 5px;
-  margin-right: 5px;
-}
-
-.chat_all .chat_main .input_box {
-  float: left;
-}
-
-.chat_all .chat_main>button {
-  width: 115px;
-  height: 120px;
-  float: right;
-}
-
-.chat_all .list_area .chat-list>button {
-  position: relative;
-  width: 116px;
-  top: 460px;
-
-
-}
-
-.chat_all .list_area .chat-list .search_box {
-  position: relative;
-  top: 455px;
-  width: 113px;
-  height: 10px;
-}
-
-input {
-  width: 655px;
-  height: 115px;
-}
-
-button {
-  float: right;
   background: #000080;
   color: #fff;
   border: none;
   position: relative;
   height: 100%;
 
-  font-size: 1em;
-  padding: 0.8em;
   cursor: pointer;
   transition: 800ms ease all;
   outline: none;
 }
 
-button:hover {
+.p_chat_all .p_header .p_leave>button:hover {
   background: #fff;
   color: #000080;
 }
 
-button:before,
+.p_chat_all .p_header .p_leave>button:before,
 button:after {
   content: '';
   position: absolute;
@@ -111,14 +62,322 @@ button:after {
   transition: 400ms ease all;
 }
 
-button:after {
+.p_chat_all .p_header .p_leave>button:after {
   right: inherit;
   top: inherit;
   left: 0;
   bottom: 0;
 }
 
-button:hover:before,
+.p_chat_all .p_header .p_leave>button:hover:before,
+button:hover:after {
+  width: 100%;
+  transition: 800ms ease all;
+}
+
+.p_chat_all .p_chat_main {
+  float: right;
+  width: 85%;
+  height: 70vh;
+  background: white;
+  position: relative;
+}
+
+.p_chat_all .p_chat_main .p_message_area {
+  width: 100%;
+  height: 70vh;
+  position: relative;
+  overflow-y: scroll;
+}
+
+.p_chat_all .p_chat_main .p_message_area .p_nickname {
+  font-size: 1em;
+  margin-left: 1.2em;
+  clear: both;
+}
+
+.p_chat_all .p_chat_main .p_message_area .p_text {
+  color: white;
+  font-size: 1.2em;
+  background-color: #848484;
+  text-shadow: 0 0 0.2em #000000;
+  border-style: solid;
+  border-width: 0.15em;
+  border-radius: 0.8em;
+  padding: 0.5em 1em 0.5em 1em;
+  clear: both;
+}
+
+.p_chat_all .p_chat_main .p_time {
+  font-size: 0.7em;
+  margin-top: 2.9em;
+}
+
+.p_chat_all .p_chat_main .p_message_area .p_other {
+  float: left;
+  margin-left: 0.8em;
+}
+
+.p_chat_all .p_chat_main .p_message_area .p_me {
+  float: right;
+  margin-right: 0.8em;
+}
+
+.p_chat_all .p_bottom_area {
+  width: 85%;
+  height: 20vh;
+  position: relative;
+  float: right;
+}
+
+.p_chat_all .p_bottom_area .p_send_area {
+  width: 14.3%;
+  height: 20vh;
+  position: relative;
+  float: right;
+  background: #000080;
+}
+
+.p_chat_all .p_bottom_area .p_send_area>button {
+  font-size: 1.2em;
+  width: 100%;
+
+  background: #000080;
+  color: #fff;
+  border: none;
+  position: relative;
+  height: 100%;
+
+  cursor: pointer;
+  transition: 800ms ease all;
+  outline: none;
+}
+
+.p_chat_all .p_bottom_area .p_send_area>button:hover {
+  background: #fff;
+  color: #000080;
+}
+
+.p_chat_all .p_bottom_area .p_send_area>button:before,
+button:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 0.2em;
+  width: 0;
+  background: #000080;
+  transition: 400ms ease all;
+}
+
+.p_chat_all .p_bottom_area .p_send_area>button:after {
+  right: inherit;
+  top: inherit;
+  left: 0;
+  bottom: 0;
+}
+
+.p_chat_all .p_bottom_area .p_send_area>button:hover:before,
+button:hover:after {
+  width: 100%;
+  transition: 800ms ease all;
+}
+
+.p_chat_all .p_bottom_area>input {
+  width: 85%;
+  height: 20vh;
+  float: left;
+  position: relative;
+  border-style: solid;
+  border-width: 0.1em 0 0 0;
+}
+
+@media only screen and (max-width:768px) {
+  .p_chat_all .p_list_area {
+    display: none;
+  }
+
+  .p_chat_all .p_list_area .p_user {
+    display: none;
+  }
+
+  .p_chat_all .p_list_area .p_list {
+    display: none;
+  }
+
+  .p_chat_all .p_chat_main {
+    width: 100%;
+  }
+
+  .p_chat_all .p_bottom_area {
+    width: 100%;
+  }
+
+  .p_chat_all .p_bottom_area>input {
+    width: 80%;
+  }
+
+  .p_chat_all .p_bottom_area .p_send_area {
+    width: 18.7%;
+    height: 20vh;
+    position: relative;
+    float: right;
+    background: #000080;
+  }
+}
+
+.p_chat_all .p_list_area {
+  float: left;
+  width: 15%;
+  height: 90vh;
+  background: #eee;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  position: relative;
+}
+
+.p_chat_all .p_list_area .p_user {
+  font-size: 1.2em;
+  font-weight: bold;
+  text-shadow: 0 0 0.1em #000000;
+  color: white;
+  width: 100%;
+  height: 5vh;
+  line-height: 5vh;
+  padding-top: 1.5vh;
+  padding-bottom: 1.5vh;
+  text-align: center;
+  background: #848484;
+  background: linear-gradient(to right bottom, #848484, #585858);
+}
+
+.p_chat_all .p_list_area .p_user_area {
+  float: left;
+  width: 100%;
+  height: 77vh;
+  background: #eee;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  position: relative;
+}
+
+.p_chat_all .p_list_area .p_user_area .p_user_list {
+  width: 97%;
+  height: 2em;
+  padding-top: 1.5%;
+  padding-bottom: 1.5%;
+  padding-left: 2%;
+  border-style: solid;
+  border-width: 0.05em;
+  border-top: 0;
+  line-height: 2em;
+}
+
+.p_chat_all .p_list_area .p_user_area .p_user_list>button {
+  width: 100%;
+
+  padding-top: 3.5%;
+  padding-bottom: 3.5%;
+  margin-top: 0.1em;
+  font: initial;
+  background: #eee;
+  color: #000;
+  position: relative;
+  border: none;
+
+  cursor: pointer;
+  transition: 800ms ease all;
+  outline: none;
+}
+
+.p_chat_all .p_list_area .p_user_area .p_user_list>button:hover {
+  background: #eee;
+  color: #848484;
+}
+
+.p_chat_all .p_list_area .p_user_area .p_user_list>button:before,
+button:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 0.2em;
+  width: 0;
+  background: #848484;
+  transition: 400ms ease all;
+}
+
+.p_chat_all .p_list_area .p_user_area .p_user_list>button:after {
+  background: #848484;
+  right: inherit;
+  top: inherit;
+  left: 0;
+  bottom: 0;
+}
+
+.p_chat_all .p_list_area .p_user_area .p_user_list>button:hover:before,
+button:hover:after {
+  width: 100%;
+  transition: 800ms ease all;
+}
+
+.p_chat_all .p_list_area .p_search {
+  width: 15%;
+  height: 5.6em;
+  border: 2px;
+  border-width: 2px;
+  background: #eee;
+  position: fixed;
+  bottom: 0.1em;
+}
+
+.p_chat_all .p_list_area .p_search>input {
+  width: 97%;
+  height: 2em;
+  position: relative;
+}
+
+.p_chat_all .p_list_area .p_search>button {
+  font-size: 1.3em;
+  width: 100%;
+
+  margin-top: 0.2em;
+  background: #000080;
+  color: #fff;
+  border: none;
+  position: relative;
+  height: 3em;
+
+  cursor: pointer;
+  transition: 800ms ease all;
+  outline: none;
+}
+
+.p_chat_all .p_list_area .p_search>button:hover {
+  background: #fff;
+  color: #000080;
+}
+
+.p_chat_all .p_list_area .p_search>button:before,
+button:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 0.2em;
+  width: 0;
+  background: #000080;
+  transition: 400ms ease all;
+}
+
+.p_chat_all .p_list_area .p_search>button:after {
+  right: inherit;
+  top: inherit;
+  left: 0;
+  bottom: 0;
+}
+
+.p_chat_all .p_list_area .p_search>button:hover:before,
 button:hover:after {
   width: 100%;
   transition: 800ms ease all;

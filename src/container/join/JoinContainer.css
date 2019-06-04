@@ -1,0 +1,162 @@
+@charset "utf-8";
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-image: url('img/background.jpg');
+  background-size: 100% 100%;
+}
+
+.left {
+  float: left;
+  width: 27%;
+  height: 100%;
+  color: white;
+  text-align: center;
+  background-color: #00142f;
+  font-family: helvetica;
+}
+
+.logo {
+  position: relative;
+  top: 10%;
+  font-size: 3.5vw;
+  font-family: helvetica;
+  color: white;
+  font-weight: bold;
+}
+
+.announce {
+  position: relative;
+  font-family: helvetica;
+  margin: auto;
+  top: 14%;
+  font-size: 1.87vw;
+}
+
+.login-box {
+  position: relative;
+  margin: auto;
+  top: 18%;
+}
+
+.login_input {
+  border-radius: 12px;
+  width: 70%;
+  margin-bottom: 20px;
+}
+
+input[type=text]:focus,
+input[type=password]:focus {
+  color: black;
+  font-family: helvetica;
+}
+
+input[type=text],
+input[type=password] {
+  font-size: 2vw;
+  font-family: helvetica;
+  height: 6vh;
+}
+
+.signup_button {
+  position: relative;
+  top: 20%;
+  border-radius: 12px;
+  font-family: helvetica;
+  margin: auto;
+  font-size: 2.5vw;
+  font-weight: bold;
+  text-shadow: 0 0 0.1em #000000;
+  color: white;
+  width: 70%;
+  height: 5vh;
+  line-height: 5vh;
+  padding-top: 1.5vh;
+  padding-bottom: 1.5vh;
+  text-align: center;
+  background-color: #504e63;
+}
+
+.right {
+  float: left;
+  width: 80%;
+  height: 100%;
+}
+
+.main-text {
+  position: absolute;
+  text-align: center;
+  top: 20%;
+  left: 47vw;
+  color: white;
+  font-size: 3.7vw;
+  line-height: 6vw;
+  font-family: helvetica;
+}
+
+.check-box {
+  position: absolute;
+  top: 40%;
+  left: 58vw;
+  color: white;
+  line-height: 100%;
+  font-size: 2.4vw;
+  font-family: helvetica;
+}
+
+@media screen and (max-width:768px) {
+  .right {
+    display: none;
+  }
+
+  .main-text {
+    display: none;
+  }
+
+  .check-box {
+    display: none;
+  }
+
+  .left {
+    width: 100%;
+  }
+
+  .logo {
+    position: relative;
+    top: 13%;
+    font-size: 10vw;
+  }
+
+  .announce {
+    position: relative;
+    top: 14%;
+    font-size: 5vw;
+  }
+
+  .login-box {
+    position: relative;
+    top: 19%;
+  }
+
+  .login_input {
+    width: 50%;
+  }
+
+  input[type=text],
+  input[type=password] {
+    font-size: 4vw;
+    font-family: helvetica;
+    height: 6vh;
+  }
+
+  .signup_button {
+    position: relative;
+    top: 20%;
+    font-size: 6vw;
+    width: 50%;
+  }
+}

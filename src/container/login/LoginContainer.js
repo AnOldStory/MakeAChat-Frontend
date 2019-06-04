@@ -2,6 +2,8 @@ import React, { Component } from "react";
 
 import config from "_variable";
 
+import "./LoginContainer.css";
+
 class LoginContainer extends Component {
   constructor(props) {
     super(props);
@@ -69,19 +71,59 @@ class LoginContainer extends Component {
     return (
       <div>
         <>
-          <input
-            type="text"
-            name="id"
-            onChange={this.handleChange}
-            value={this.state.id}
-          />
-          <input
-            name="password"
-            type="password"
-            onChange={this.handleChange}
-            value={this.state.password}
-          />
-          <button onClick={this.handleLogin}>로그인</button>
+          <div className="left">
+            <div className="logo">
+              <h1>MakeAChat</h1>
+            </div>
+            <br />
+            <br />
+            <div className="announce">
+              Login with
+              <br /> Make A Chat Account
+            </div>
+            <div className="login-box">
+              <input
+                className="login_input"
+                type="text"
+                name="id"
+                onChange={this.handleChange}
+                value={this.state.id}
+              />
+              <input
+                className="login_input"
+                name="password"
+                type="password"
+                onChange={this.handleChange}
+                value={this.state.password}
+              />
+            </div>
+            <div className="login_button" onClick={this.handleLogin}>
+              Login
+            </div>
+            <div className="signup_button">Sign Up</div>
+          </div>
+
+          <div className="right">
+            <div className="main-text">
+              <h1>
+                Download MakeAChat,
+                <br />
+                Make Chat Better!
+              </h1>
+            </div>
+            <div className="check-box">
+              <br />
+              <p>
+                <img src="/img/check-box.png" alt="img" /> 1:1 Chat
+              </p>
+              <p>
+                <img src="/img/check-box.png" alt="img" /> Group Message
+              </p>
+              <p>
+                <img src="/img/check-box.png" alt="img" /> Modern UI
+              </p>
+            </div>
+          </div>
           <div>{this.state.error}</div>
         </>
       </div>
