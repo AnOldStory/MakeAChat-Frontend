@@ -11,8 +11,15 @@ class JoinContainer extends Component {
       nickname: "",
       error: ""
     };
+    this.handleEnter = this.handleEnter.bind(this);
     this.handleSignup = this.handleSignup.bind(this);
     this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleEnter(e) {
+    if (e.key === "Enter") {
+      this.handleSignup();
+    }
   }
 
   handleSignup() {
@@ -65,7 +72,7 @@ class JoinContainer extends Component {
 
   render() {
     return (
-      <div class="join_container">
+      <div className="join_container">
         <>
           <div className="left">
             <div className="logo">MakeAChat</div>
@@ -105,6 +112,7 @@ class JoinContainer extends Component {
                 onChange={this.handleChange}
                 value={this.state.nickname}
                 placeholder="Nickname"
+                onKeyDown={this.handleEnter}
               />
               <br />
             </div>

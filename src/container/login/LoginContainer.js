@@ -13,8 +13,15 @@ class LoginContainer extends Component {
       token: "",
       error: ""
     };
+    this.handleEnter = this.handleEnter.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
     this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleEnter(e) {
+    if (e.key === "Enter") {
+      this.handleLogin();
+    }
   }
 
   handleLogin() {
@@ -95,6 +102,7 @@ class LoginContainer extends Component {
                 onChange={this.handleChange}
                 value={this.state.password}
                 placeholder="Password"
+                onKeyDown={this.handleEnter}
               />
             </div>
             <div className="login_button" onClick={this.handleLogin}>
@@ -105,11 +113,9 @@ class LoginContainer extends Component {
 
           <div className="right">
             <div className="main-text">
-              <h1>
-                Download MakeAChat,
-                <br />
-                Make Chat Better!
-              </h1>
+              Download MakeAChat,
+              <br />
+              Make Chat Better!
             </div>
             <div className="check-box">
               <br />
