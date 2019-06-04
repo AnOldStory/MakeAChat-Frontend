@@ -6,6 +6,10 @@ import LoginLink from "component/LoginLink";
 import "./MainContainer.css";
 
 class MainContainer extends Component {
+  componentDidMount() {
+    console.log("Main");
+  }
+
   render() {
     return (
       <div className="main_container">

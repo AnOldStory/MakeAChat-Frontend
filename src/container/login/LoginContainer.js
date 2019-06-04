@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import Loading from "component/Loading";
+
 import config from "_variable";
 
 import "./LoginContainer.css";
@@ -11,11 +13,17 @@ class LoginContainer extends Component {
       id: "",
       password: "",
       token: "",
-      error: ""
+      error: "",
+      loading: 0
     };
     this.handleEnter = this.handleEnter.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
+    this.handleJoin = this.handleJoin.bind(this);
     this.handleChange = this.handleChange.bind(this);
+  }
+
+  componentDidMount() {
+    console.log("Login");
   }
 
   handleEnter(e) {
@@ -25,6 +33,9 @@ class LoginContainer extends Component {
   }
 
   handleLogin() {
+    this.setState({
+      loading: 1
+    });
     let bodyData = {
       username: this.state.id,
       password: this.state.password
@@ -45,27 +56,34 @@ class LoginContainer extends Component {
       .then(res => {
         switch (res.code) {
           case 200:
-            this.setState({
-              token: res.token
-            });
             this.props.handleToken({
               token: res.token,
               nickname: res.nickname
             });
-            this.props.routeMethod.history.push("/chat");
-            break;
+
+            return true;
           case 400:
             this.setState({
-              error: res.alert.wrong || res.alert.username || res.alert.password
+              error:
+                res.alert.wrong || res.alert.username || res.alert.password,
+              loading: 0
             });
             break;
           default:
             break;
         }
+        return false;
+      })
+      .then(res => {
+        if (res) this.props.routeMethod.history.push("/chat");
       })
       .catch(err => {
         console.log(err);
       });
+  }
+
+  handleJoin() {
+    this.props.routeMethod.history.push("/join");
   }
 
   handleChange(e) {
@@ -78,6 +96,7 @@ class LoginContainer extends Component {
     return (
       <div className="login_container">
         <>
+          {this.state.loading ? <Loading /> : ""}
           <div className="left">
             <div className="logo">MakeAChat</div>
             <br />
@@ -105,10 +124,13 @@ class LoginContainer extends Component {
                 onKeyDown={this.handleEnter}
               />
             </div>
+            <div className="err">{this.state.error}</div>
             <div className="login_button" onClick={this.handleLogin}>
               Login
             </div>
-            <div className="signup_button">Sign Up</div>
+            <div className="signup_button" onClick={this.handleJoin}>
+              Sign Up
+            </div>
           </div>
 
           <div className="right">
@@ -130,7 +152,6 @@ class LoginContainer extends Component {
               </p>
             </div>
           </div>
-          <div>{this.state.error}</div>
         </>
       </div>
     );

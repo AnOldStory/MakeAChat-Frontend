@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 
+import Loading from "component/Loading";
+
 import config from "_variable";
+
+import "./JoinContainer.css";
 
 class JoinContainer extends Component {
   constructor(props) {
@@ -9,11 +13,16 @@ class JoinContainer extends Component {
       id: "",
       password: "",
       nickname: "",
-      error: ""
+      error: "",
+      loading: 0
     };
     this.handleEnter = this.handleEnter.bind(this);
     this.handleSignup = this.handleSignup.bind(this);
     this.handleChange = this.handleChange.bind(this);
+  }
+
+  componentDidMount() {
+    console.log("Join");
   }
 
   handleEnter(e) {
@@ -23,6 +32,9 @@ class JoinContainer extends Component {
   }
 
   handleSignup() {
+    this.setState({
+      loading: 1
+    });
     let bodyData = {
       username: this.state.id,
       password: this.state.password,
@@ -44,20 +56,24 @@ class JoinContainer extends Component {
       .then(res => {
         switch (res.code) {
           case 200:
-            this.props.routeMethod.history.push("/login");
-            break;
+            return true;
           case 400:
             this.setState({
               error:
                 res.alert.wrong ||
                 res.alert.username ||
                 res.alert.password ||
-                res.alert.nickname
+                res.alert.nickname,
+              loading: 0
             });
             break;
           default:
             break;
         }
+        return false;
+      })
+      .then(res => {
+        if (res) this.props.routeMethod.history.push("/login");
       })
       .catch(err => {
         console.log(err);
@@ -74,6 +90,7 @@ class JoinContainer extends Component {
     return (
       <div className="join_container">
         <>
+          {this.state.loading ? <Loading /> : ""}
           <div className="left">
             <div className="logo">MakeAChat</div>
             <br />
@@ -116,7 +133,7 @@ class JoinContainer extends Component {
               />
               <br />
             </div>
-
+            <div className="err">{this.state.error}</div>
             <div className="signup_button" onClick={this.handleSignup}>
               회원가입
             </div>
@@ -140,8 +157,6 @@ class JoinContainer extends Component {
               </p>
             </div>
           </div>
-
-          <div>{this.state.error}</div>
         </>
       </div>
     );

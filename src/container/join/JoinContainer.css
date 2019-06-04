@@ -6,8 +6,6 @@ body {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-image: url('img/background.jpg');
-  background-size: 100% 100%;
 }
 
 .left {
@@ -159,4 +157,17 @@ input[type=password] {
     font-size: 6vw;
     width: 50%;
   }
+}
+
+.join_container {
+  background-image: url('/img/background.jpg');
+  background-size: 100% 100%;
+}
+
+.err {
+  font-family: helvetica;
+  margin: auto;
+  margin-bottom: 1.2vh;
+  font-size: 1vw;
+  color: red;
 }
