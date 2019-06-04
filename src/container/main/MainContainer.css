@@ -1,7 +1,7 @@
 main {
+  height: 100%;
   margin: 10px;
   padding: 10px;
-  background-image: url('/images/main3.jpg');
   background-size: cover;
 }
 
@@ -66,4 +66,8 @@ nav a:hover {
     border-radius: 5px;
     float: right;
   }
+}
+
+.main_container {
+  background-image: url('/img/main3.jpg');
 }

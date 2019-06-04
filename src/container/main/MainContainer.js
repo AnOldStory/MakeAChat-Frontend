@@ -8,7 +8,7 @@ import "./MainContainer.css";
 class MainContainer extends Component {
   render() {
     return (
-      <div className="main">
+      <div className="main_container">
         <header>
           <h1>MAKE A CHAT</h1>
           <nav>

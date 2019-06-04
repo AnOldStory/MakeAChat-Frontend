@@ -69,12 +69,10 @@ class LoginContainer extends Component {
 
   render() {
     return (
-      <div>
+      <div className="login_container">
         <>
           <div className="left">
-            <div className="logo">
-              <h1>MakeAChat</h1>
-            </div>
+            <div className="logo">MakeAChat</div>
             <br />
             <br />
             <div className="announce">
@@ -88,6 +86,7 @@ class LoginContainer extends Component {
                 name="id"
                 onChange={this.handleChange}
                 value={this.state.id}
+                placeholder="ID"
               />
               <input
                 className="login_input"
@@ -95,6 +94,7 @@ class LoginContainer extends Component {
                 type="password"
                 onChange={this.handleChange}
                 value={this.state.password}
+                placeholder="Password"
               />
             </div>
             <div className="login_button" onClick={this.handleLogin}>

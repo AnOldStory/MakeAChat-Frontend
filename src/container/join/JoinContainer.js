@@ -65,7 +65,7 @@ class JoinContainer extends Component {
 
   render() {
     return (
-      <div>
+      <div class="join_container">
         <>
           <div className="left">
             <div className="logo">MakeAChat</div>
@@ -83,7 +83,7 @@ class JoinContainer extends Component {
                 className="login_input"
                 onChange={this.handleChange}
                 value={this.state.id}
-                placeholder="아이디"
+                placeholder="ID"
               />
 
               <br />
@@ -94,7 +94,7 @@ class JoinContainer extends Component {
                 className="login_input"
                 onChange={this.handleChange}
                 value={this.state.password}
-                placeholder="비밀번호"
+                placeholder="Password"
               />
               <br />
 
@@ -104,7 +104,7 @@ class JoinContainer extends Component {
                 className="login_input"
                 onChange={this.handleChange}
                 value={this.state.nickname}
-                placeholder="닉네임"
+                placeholder="Nickname"
               />
               <br />
             </div>
@@ -122,13 +122,13 @@ class JoinContainer extends Component {
             <div className="check-box">
               <br />
               <p>
-                <img src="img/check-box.png" /> 1:1 Chat
+                <img src="img/check-box.png" alt="img" /> 1:1 Chat
               </p>
               <p>
-                <img src="img/check-box.png" /> Group Message
+                <img src="img/check-box.png" alt="img" /> Group Message
               </p>
               <p>
-                <img src="img/check-box.png" /> Modern UI
+                <img src="img/check-box.png" alt="img" /> Modern UI
               </p>
             </div>
           </div>

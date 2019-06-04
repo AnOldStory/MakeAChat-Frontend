@@ -262,3 +262,7 @@ button:hover:after {
     background: #000080;
   }
 }
+
+.messagesEnd {
+  float: left;
+}
