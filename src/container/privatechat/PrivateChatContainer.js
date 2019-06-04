@@ -56,7 +56,6 @@ class PrivateChatConatiner extends Component {
       );
     }
   }
-
   handleEnter(e) {
     if (e.key === "Enter" && this.state.token) {
       this.handlePush();
@@ -301,27 +300,24 @@ class PrivateChatConatiner extends Component {
                                 : "p_other")
                             }
                           >
-                            {msg.time
-                              .replace(/T|:|\./g, "-")
-                              .split("-")
-                              .reduce((init, now, index) => {
-                                switch (index) {
-                                  case 1:
-                                    if (init === "system") {
-                                      return "";
-                                    } else {
-                                      return init.substring(2) + "." + now;
-                                    }
-                                  case 2:
-                                    return init + "." + now;
-                                  case 3:
-                                    return init + " " + now;
-                                  case 4:
-                                    return init + ":" + now;
-                                  default:
-                                    return init;
-                                }
-                              })}
+                            {msg.time === "system"
+                              ? "system"
+                              : (new Date(msg.time).getFullYear() % 100) +
+                                "." +
+                                (new Date(msg.time).getMonth() + 1 > 10
+                                  ? new Date(msg.time).getMonth() + 1 + "."
+                                  : "0" +
+                                    (new Date(msg.time).getMonth() + 1) +
+                                    ".") +
+                                (new Date(msg.time).getDate() > 10
+                                  ? new Date(msg.time).getDate() + " "
+                                  : "0" + new Date(msg.time).getDate() + " ") +
+                                (new Date(msg.time).getHours() > 10
+                                  ? new Date(msg.time).getHours() + ":"
+                                  : "0" + new Date(msg.time).getHours() + ":") +
+                                (new Date(msg.time).getMinutes() > 10
+                                  ? new Date(msg.time).getMinutes()
+                                  : "0" + new Date(msg.time).getMinutes())}
                           </div>
                         </div>
                       ];

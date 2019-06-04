@@ -174,7 +174,6 @@ class ChatContainer extends Component {
   }
 
   handleMember(msg) {
-    console.log(msg);
     if (msg["code"] === 200) {
       this.setState({
         members: msg.members
@@ -199,11 +198,13 @@ class ChatContainer extends Component {
         </div>
         <div className="g_list_area">
           <div className="g_user">user</div>
-          {this.state.members.map((name, i) => (
-            <div className="g_list" key={i}>
-              {name}
-            </div>
-          ))}
+          <div className="g_left_area">
+            {this.state.members.map((name, i) => (
+              <div className="g_list" key={i}>
+                {name}
+              </div>
+            ))}
+          </div>
         </div>
         <div className="g_chat_main">
           <div className="g_message_area">
@@ -247,27 +248,24 @@ class ChatContainer extends Component {
                             : "g_other")
                         }
                       >
-                        {msg.time
-                          .replace(/T|:|\./g, "-")
-                          .split("-")
-                          .reduce((init, now, index) => {
-                            switch (index) {
-                              case 1:
-                                if (init === "system") {
-                                  return "";
-                                } else {
-                                  return init.substring(2) + "." + now;
-                                }
-                              case 2:
-                                return init + "." + now;
-                              case 3:
-                                return init + " " + now;
-                              case 4:
-                                return init + ":" + now;
-                              default:
-                                return init;
-                            }
-                          })}
+                        {msg.time === "system"
+                          ? "system"
+                          : (new Date(msg.time).getFullYear() % 100) +
+                            "." +
+                            (new Date(msg.time).getMonth() + 1 > 10
+                              ? new Date(msg.time).getMonth() + 1 + "."
+                              : "0" +
+                                (new Date(msg.time).getMonth() + 1) +
+                                ".") +
+                            (new Date(msg.time).getDate() > 10
+                              ? new Date(msg.time).getDate() + " "
+                              : "0" + new Date(msg.time).getDate() + " ") +
+                            (new Date(msg.time).getHours() > 10
+                              ? new Date(msg.time).getHours() + ":"
+                              : "0" + new Date(msg.time).getHours() + ":") +
+                            (new Date(msg.time).getMinutes() > 10
+                              ? new Date(msg.time).getMinutes()
+                              : "0" + new Date(msg.time).getMinutes())}
                       </div>
                     </div>
                   ];
@@ -301,7 +299,6 @@ class ChatContainer extends Component {
               </button>
             </div>
           </div>
-          <div className="err">{this.state.err}</div>
         </div>
       </div>
     );
