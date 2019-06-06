@@ -70,9 +70,11 @@ class ChatContainer extends Component {
   }
 
   handleResponse(msg) {
+    console.log(msg);
     if (msg["code"] === 200) {
       let result = this.state.chats;
       result.push(msg);
+      result.sort((a, b) => new Date(a.time) - new Date(b.time));
       this.setState({
         chats: result,
         err: ""
@@ -192,7 +194,7 @@ class ChatContainer extends Component {
           Make A Chat
           <span className="g_leave">
             <button type="button" name="g_button1" onClick={this.handleMove}>
-              Go to Personal Room
+              Go to Personal Room ▶
             </button>
           </span>
         </div>

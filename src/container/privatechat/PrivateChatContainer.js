@@ -109,6 +109,9 @@ class PrivateChatConatiner extends Component {
       let result = this.state.chats;
       if (msg) {
         result[this.state.target].push(msg);
+        result[this.state.target].sort(
+          (a, b) => new Date(a.time) - new Date(b.time)
+        );
       }
 
       this.setState({
@@ -176,6 +179,7 @@ class PrivateChatConatiner extends Component {
           ];
         }
         result[msg.from].push(msg);
+        result[msg.from].sort((a, b) => new Date(a.time) - new Date(b.time));
       }
       this.setState({
         chats: result
