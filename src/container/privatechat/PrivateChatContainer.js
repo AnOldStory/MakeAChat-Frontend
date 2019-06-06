@@ -92,7 +92,9 @@ class PrivateChatConatiner extends Component {
     this.setState({
       who: e.target.name
     });
-
+    if (this.messagesEnd) {
+      this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+    }
     this.socket.emit(
       "get-valid",
       JSON.stringify({
@@ -199,6 +201,9 @@ class PrivateChatConatiner extends Component {
             target: this.state.who
           })
         );
+        if (this.messagesEnd) {
+          this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+        }
       } else {
         this.setState({
           target: this.state.who
