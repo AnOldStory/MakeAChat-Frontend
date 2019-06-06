@@ -5,7 +5,7 @@ import LoginLink from "component/LoginLink";
 
 import config from "_variable";
 
-import "./ChatContainer.css";
+import "./ChatContainer.scss";
 
 class ChatContainer extends Component {
   constructor(props) {
@@ -196,9 +196,9 @@ class ChatContainer extends Component {
             </button>
           </span>
         </div>
-        <div className="g_list_area">
-          <div className="g_user">user</div>
-          <div className="g_left_area">
+        <div className="g_left_area">
+          <div className="g_user"> User </div>
+          <div className="g_list_area">
             {this.state.members.map((name, i) => (
               <div className="g_list" key={i}>
                 {name}

@@ -1,7 +1,4 @@
-* {
-  margin: 0;
-  padding: 0;
-}
+@import "_variables.scss";
 
 .g_chat_all {
   list-style: none;
@@ -17,7 +14,7 @@
   font-weight: bold;
   width: 100%;
   height: 10vh;
-  background: linear-gradient(to right bottom, #0B0B3B, #000080);
+  background: $g-chat-header;
   color: white;
   text-align: center;
   line-height: 10vh;
@@ -31,10 +28,9 @@
 }
 
 .g_chat_all .g_header .g_leave>button {
-  width: 10em;
   font-size: 0.8em;
 
-  background: #000080;
+  background: $g-chat-background;
   color: #fff;
   border: none;
   position: relative;
@@ -47,7 +43,7 @@
 
 .g_chat_all .g_header .g_leave>button:hover {
   background: #fff;
-  color: #000080;
+  color: $g-chat-background;
 }
 
 .g_chat_all .g_header .g_leave>button:before,
@@ -58,7 +54,7 @@ button:after {
   right: 0;
   height: 0.2em;
   width: 0;
-  background: #000080;
+  background: $g-chat-background;
   transition: 400ms ease all;
 }
 
@@ -75,41 +71,56 @@ button:hover:after {
   transition: 800ms ease all;
 }
 
-.g_chat_all .g_list_area {
+.g_chat_all .g_left_area {
   float: left;
   width: 15%;
-  height: 90vh;
+  height: 75vh;
+}
+
+.g_chat_all .g_left_area .g_user {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: $g-chat-left-title-color;
+  width: 100%;
+  height: 3vh;
+  line-height: 3vh;
+  padding-top: 1.5vh;
+  padding-bottom: 1.5vh;
+  text-align: center;
+  background: $g-chat-left-title;
+  float: left;
+  position: relative;
+  @include box-shadow;
+}
+
+.g_chat_all .g_left_area .g_list_area {
+  float: left;
+  width: 100%;
+  height: 82vh;
   background: #eee;
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
   position: relative;
 }
 
-.g_chat_all .g_list_area .g_user {
-  font-size: 1.2em;
-  font-weight: bold;
-  text-shadow: 0 0 0.1em #000000;
-  color: white;
-  width: 100%;
-  height: 5vh;
-  line-height: 5vh;
-  padding-top: 1.5vh;
-  padding-bottom: 1.5vh;
+.g_chat_all .g_list_area .g_list {
+  margin: 0.5em;
+  width: calc(100% - 1.2em);
+  height: 2em;
   text-align: center;
-  background: #848484;
-  background: linear-gradient(to right bottom, #848484, #585858);
+  border-radius: 0.5em;
+  line-height: 2em;
+  background: #c2c2c2;
+  cursor: pointer;
+  @include box-shadow;
+  @include animate(slideUp);
 }
 
-.g_chat_all .g_list_area .g_list {
-  width: 97%;
-  height: 2em;
-  padding-top: 1.5%;
-  padding-bottom: 1.5%;
-  padding-left: 2%;
-  border-style: solid;
-  border-width: 0.05em;
-  border-top: 0;
-  line-height: 2em;
+.g_chat_all .g_list_area .g_list:hover {
+  margin: 0.5em;
+  width: calc(100% - 1.2em);
+  color: white;
+  background: $g-chat-left-list-hover;
 }
 
 .g_chat_all .g_chat_main {
@@ -124,8 +135,9 @@ button:hover:after {
   width: 100%;
   height: 70vh;
   position: relative;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
+
 
 .g_chat_all .g_chat_main .g_message_area .g_nickname {
   font-size: 1em;
@@ -136,10 +148,8 @@ button:hover:after {
 .g_chat_all .g_chat_main .g_message_area .g_text {
   color: white;
   font-size: 1.2em;
-  background-color: #848484;
-  text-shadow: 0 0 0.2em #000000;
+  background-color: $g-chat-text-background;
   border-style: solid;
-  border-width: 0.15em;
   border-radius: 0.8em;
   padding: 0.5em 1em 0.5em 1em;
   clear: both;
@@ -153,33 +163,35 @@ button:hover:after {
 .g_chat_all .g_chat_main .g_message_area .g_other {
   float: left;
   margin-left: 0.8em;
+  @include animate(rightIn);
 }
 
 .g_chat_all .g_chat_main .g_message_area .g_me {
   float: right;
   margin-right: 0.8em;
+  @include animate(leftIn);
 }
 
 .g_chat_all .g_bottom_area {
-  width: 85%;
+  width: 100%;
   height: 20vh;
   position: relative;
   float: right;
 }
 
 .g_chat_all .g_bottom_area .g_send_area {
-  width: 14.3%;
-  height: 20vh;
+  width: calc(15% - 0.24em);
+  height: 20.5vh;
   position: relative;
   float: right;
-  background: #000080;
+  background: $g-chat-background;
 }
 
 .g_chat_all .g_bottom_area .g_send_area>button {
   font-size: 1.2em;
   width: 100%;
 
-  background: #000080;
+  background: $g-chat-background;
   color: #fff;
   border: none;
   position: relative;
@@ -192,7 +204,7 @@ button:hover:after {
 
 .g_chat_all .g_bottom_area .g_send_area>button:hover {
   background: #fff;
-  color: #000080;
+  color: $g-chat-background;
 }
 
 .g_chat_all .g_bottom_area .g_send_area>button:before,
@@ -203,7 +215,7 @@ button:after {
   right: 0;
   height: 0.2em;
   width: 0;
-  background: #000080;
+  background: $g-chat-background;
   transition: 400ms ease all;
 }
 
@@ -226,19 +238,23 @@ button:hover:after {
   float: left;
   position: relative;
   border-style: solid;
-  border-width: 0.1em 0 0 0;
+  border-width: 0.05em 0.05em 0.05em 0.05em;
 }
 
 @media only screen and (max-width:768px) {
-  .g_chat_all .g_list_area {
+  .g_left_area {
     display: none;
   }
 
-  .g_chat_all .g_list_area .g_user {
+  .g_chat_all .g_left_area .g_list_area {
     display: none;
   }
 
-  .g_chat_all .g_list_area .g_list {
+  .g_chat_all .g_left_area .g_user {
+    display: none;
+  }
+
+  .g_chat_all .g_left_area .g_list_area .g_list {
     display: none;
   }
 
@@ -255,11 +271,11 @@ button:hover:after {
   }
 
   .g_chat_all .g_bottom_area .g_send_area {
-    width: 18.7%;
-    height: 20vh;
+    width: calc(20% - 0.22em);
+    height: 20.5vh;
     position: relative;
     float: right;
-    background: #000080;
+    background: $g-chat-background;
   }
 }
 

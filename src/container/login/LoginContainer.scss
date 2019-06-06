@@ -1,4 +1,4 @@
-@charset "utf-8";
+@import "_variables.scss";
 
 html,
 body {
@@ -6,6 +6,7 @@ body {
   margin: 0;
   padding: 0;
   overflow: hidden;
+
 }
 
 .left {
@@ -60,6 +61,26 @@ input[type=password] {
   height: 6vh;
 }
 
+.login_button {
+  position: relative;
+  top: 20%;
+  border-radius: 12px;
+  font-family: helvetica;
+  margin: auto;
+  margin-bottom: 20px;
+  font-size: 2.5vw;
+  font-weight: bold;
+  text-shadow: 0 0 0.1em #000000;
+  color: white;
+  width: 70%;
+  height: 5vh;
+  line-height: 5vh;
+  padding-top: 1.5vh;
+  padding-bottom: 1.5vh;
+  text-align: center;
+  background-color: #9895b1;
+}
+
 .signup_button {
   position: relative;
   top: 20%;
@@ -80,7 +101,7 @@ input[type=password] {
 }
 
 .right {
-  float: left;
+  float: right;
   width: 80%;
   height: 100%;
 }
@@ -94,6 +115,7 @@ input[type=password] {
   font-size: 3.7vw;
   line-height: 6vw;
   font-family: helvetica;
+  @include animate(slideUp);
 }
 
 .check-box {
@@ -104,6 +126,7 @@ input[type=password] {
   line-height: 100%;
   font-size: 2.4vw;
   font-family: helvetica;
+  @include animate(slideUp);
 }
 
 @media screen and (max-width:768px) {
@@ -151,6 +174,13 @@ input[type=password] {
     height: 6vh;
   }
 
+  .login_button {
+    position: relative;
+    top: 20%;
+    font-size: 6vw;
+    width: 50%;
+  }
+
   .signup_button {
     position: relative;
     top: 20%;
@@ -159,15 +189,16 @@ input[type=password] {
   }
 }
 
-.join_container {
+.login_container {
   background-image: url('/img/background.jpg');
   background-size: 100% 100%;
 }
 
 .err {
+  position: relative;
+  top: 18%;
   font-family: helvetica;
   margin: auto;
-  margin-bottom: 1.2vh;
   font-size: 1vw;
   color: red;
 }

@@ -4,7 +4,7 @@ import Loading from "component/Loading";
 
 import config from "_variable";
 
-import "./LoginContainer.css";
+import "./LoginContainer.scss";
 
 class LoginContainer extends Component {
   constructor(props) {

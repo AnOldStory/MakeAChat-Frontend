@@ -2,7 +2,7 @@ import React from "react";
 
 import Router from "./route/Router";
 
-import "./index.css";
+import "./index.scss";
 
 const Root = () => {
   return <Router />;

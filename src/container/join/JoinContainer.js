@@ -4,7 +4,7 @@ import Loading from "component/Loading";
 
 import config from "_variable";
 
-import "./JoinContainer.css";
+import "./JoinContainer.scss";
 
 class JoinContainer extends Component {
   constructor(props) {

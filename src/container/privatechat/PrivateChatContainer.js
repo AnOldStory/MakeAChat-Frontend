@@ -3,7 +3,7 @@ import io from "socket.io-client";
 
 import LoginLink from "component/LoginLink";
 
-import "./PrivateChatContainer.css";
+import "./PrivateChatContainer.scss";
 
 import config from "_variable";
 

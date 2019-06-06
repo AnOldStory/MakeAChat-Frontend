@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import JoinLink from "component/JoinLink";
 import LoginLink from "component/LoginLink";
 
-import "./MainContainer.css";
+import "./MainContainer.scss";
 
 class MainContainer extends Component {
   componentDidMount() {
