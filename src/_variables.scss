@@ -15,6 +15,21 @@ $g-chat-left-list-hover:#777777;
 $g-chat-right-send: #000080;
 
 $g-chat-text-background :#848484;
+$g-chat-system-background :#666666;
+
+$p-chat-background:#000080;
+$p-chat-header:$gradation2;
+$p-chat-header-leave: rgba(0, 0, 128, 0.5);
+
+$p-chat-left-title:$gray-gradation;
+$p-chat-left-title-color:white;
+$p-chat-left-list-hover:#777777;
+
+$p-chat-right-send: #000080;
+
+$p-chat-text-background :#848484;
+$p-chat-system-background :#666666;
+
 
 * {
   transition: all 1s;

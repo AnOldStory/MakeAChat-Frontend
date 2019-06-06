@@ -16,7 +16,7 @@ class PrivateChatConatiner extends Component {
       serverUrl: config.serverUrl,
       text: "",
       err: "",
-      who: "",
+      who: this.props.who,
       lists: [],
       chats: {},
       target: ""
@@ -54,6 +54,7 @@ class PrivateChatConatiner extends Component {
           token: this.props.token
         })
       );
+      this.handleValid();
     }
   }
   handleEnter(e) {
@@ -90,16 +91,16 @@ class PrivateChatConatiner extends Component {
 
   handleButtonValid(e) {
     this.setState({
-      who: e.target.name
+      who: e.target.getAttribute("name")
     });
     if (this.messagesEnd) {
-      this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+      this.messagesEnd.scrollTo({ top: 9999, behavior: "smooth" });
     }
     this.socket.emit(
       "get-valid",
       JSON.stringify({
         token: this.state.token,
-        nickname: e.target.name
+        nickname: e.target.getAttribute("name")
       })
     );
   }
@@ -119,7 +120,7 @@ class PrivateChatConatiner extends Component {
         err: ""
       });
       if (this.messagesEnd) {
-        this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+        this.messagesEnd.scrollTo({ top: 9999, behavior: "smooth" });
       }
     } else {
       this.setState({
@@ -206,7 +207,7 @@ class PrivateChatConatiner extends Component {
           })
         );
         if (this.messagesEnd) {
-          this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+          this.messagesEnd.scrollTo({ top: 9999, behavior: "smooth" });
         }
       } else {
         this.setState({
@@ -240,32 +241,41 @@ class PrivateChatConatiner extends Component {
           Make A Chat
           <div className="p_leave">
             <button type="button" name="p_button1" onClick={this.handleMove}>
-              Go to Group Room
+              Go to Group Room ▶
             </button>
           </div>
         </div>
-        <div className="p_list_area">
-          <div className="p_user_area">
-            <div className="p_user">user</div>
+        <div className="p_left_area">
+          <div className="p_user">User</div>
+          <div className="p_list_area">
             {this.state.lists.map((msg, i) => (
-              <div className="p_user_list" key={i}>
-                <button name={msg} onClick={this.handleButtonValid}>
-                  {msg}
-                </button>
+              <div
+                className="p_list"
+                key={i}
+                name={msg}
+                onClick={this.handleButtonValid}
+              >
+                {msg}
               </div>
             ))}
-          </div>
-          <div className="p_search">
-            <input
-              name="who"
-              onChange={this.handleTyping}
-              value={this.state.who}
-            />
-            <button onClick={this.handleValid}>SEARCH</button>
+            <div className="err">{this.state.err}</div>
+            <div className="p_search">
+              <input
+                name="who"
+                onChange={this.handleTyping}
+                value={this.state.who}
+              />
+              <button onClick={this.handleValid}>SEARCH</button>
+            </div>
           </div>
         </div>
         <div className="p_chat_main">
-          <div className="p_message_area">
+          <div
+            className="p_message_area"
+            ref={el => {
+              this.messagesEnd = el;
+            }}
+          >
             {this.state.token ? (
               this.state.target !== "" ? (
                 <>
@@ -283,6 +293,8 @@ class PrivateChatConatiner extends Component {
                                 "p_nickname " +
                                 (msg.nickname === this.state.nickname
                                   ? "p_me"
+                                  : msg.nickanme === "시스템"
+                                  ? ""
                                   : "p_other")
                               }
                             >
@@ -339,16 +351,11 @@ class PrivateChatConatiner extends Component {
               )
             ) : (
               <>
+                {this.props.routeMethod.history.push("/")}
                 로그인이 필요합니다.
                 <LoginLink />
               </>
             )}
-            <div
-              className="messagesEnd"
-              ref={el => {
-                this.messagesEnd = el;
-              }}
-            />
           </div>
 
           <div className="p_bottom_area">
@@ -366,7 +373,6 @@ class PrivateChatConatiner extends Component {
               </button>
             </div>
           </div>
-          <div className="err">{this.state.err}</div>
         </div>
       </div>
     );

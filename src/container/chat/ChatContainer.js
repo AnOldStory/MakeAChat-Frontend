@@ -28,6 +28,7 @@ class ChatContainer extends Component {
     this.handleMemberIn = this.handleMemberIn.bind(this);
     this.handleMemberOut = this.handleMemberOut.bind(this);
     this.handleMember = this.handleMember.bind(this);
+    this.handleWho = this.handleWho.bind(this);
   }
 
   componentDidMount() {
@@ -70,7 +71,6 @@ class ChatContainer extends Component {
   }
 
   handleResponse(msg) {
-    console.log(msg);
     if (msg["code"] === 200) {
       let result = this.state.chats;
       result.push(msg);
@@ -80,7 +80,7 @@ class ChatContainer extends Component {
         err: ""
       });
       if (this.messagesEnd) {
-        this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+        this.messagesEnd.scrollBy({ top: 9999, behavior: "smooth" });
       }
     } else {
       this.setState({
@@ -144,7 +144,7 @@ class ChatContainer extends Component {
       });
     }
     if (this.messagesEnd) {
-      this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+      this.messagesEnd.scrollTo({ top: 9999, behavior: "smooth" });
     }
   }
 
@@ -171,7 +171,7 @@ class ChatContainer extends Component {
       });
     }
     if (this.messagesEnd) {
-      this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+      this.messagesEnd.scrollTo({ top: 9999, behavior: "smooth" });
     }
   }
 
@@ -184,6 +184,13 @@ class ChatContainer extends Component {
       this.setState({
         err: "예상치 못한 오류가 발생하였습니다. 서버 연결을 확인해주세요."
       });
+    }
+  }
+
+  handleWho(e) {
+    if (e.target.getAttribute("name") !== this.state.nickname) {
+      this.props.handleWho(e.target.getAttribute("name"));
+      this.handleMove();
     }
   }
 
@@ -202,14 +209,24 @@ class ChatContainer extends Component {
           <div className="g_user"> User </div>
           <div className="g_list_area">
             {this.state.members.map((name, i) => (
-              <div className="g_list" key={i}>
+              <div
+                className="g_list"
+                name={name}
+                key={i}
+                onClick={this.handleWho}
+              >
                 {name}
               </div>
             ))}
           </div>
         </div>
         <div className="g_chat_main">
-          <div className="g_message_area">
+          <div
+            className="g_message_area"
+            ref={el => {
+              this.messagesEnd = el;
+            }}
+          >
             {this.state.token ? (
               <>
                 안녕하세요 {this.state.nickname}님 여기는 공용 채팅 공간입니다.
@@ -224,10 +241,12 @@ class ChatContainer extends Component {
                             "g_nickname " +
                             (msg.nickname === this.state.nickname
                               ? "g_me"
+                              : msg.nickname === "시스템"
+                              ? "g_system"
                               : "g_other")
                           }
                         >
-                          {msg.nickname}
+                          {msg.nickname !== "시스템" ? msg.nickname : ""}
                         </div>
                       ) : (
                         ""
@@ -237,6 +256,8 @@ class ChatContainer extends Component {
                           "g_text " +
                           (msg.nickname === this.state.nickname
                             ? "g_me"
+                            : msg.nickname === "시스템"
+                            ? "g_system"
                             : "g_other")
                         }
                       >
@@ -247,11 +268,13 @@ class ChatContainer extends Component {
                           "g_time " +
                           (msg.nickname === this.state.nickname
                             ? "g_me"
+                            : msg.nickname === "시스템"
+                            ? "g_system"
                             : "g_other")
                         }
                       >
                         {msg.time === "system"
-                          ? "system"
+                          ? ""
                           : (new Date(msg.time).getFullYear() % 100) +
                             "." +
                             (new Date(msg.time).getMonth() + 1 > 10
@@ -272,15 +295,10 @@ class ChatContainer extends Component {
                     </div>
                   ];
                 }, [])}
-                <div
-                  className="messagesEnd"
-                  ref={el => {
-                    this.messagesEnd = el;
-                  }}
-                />
               </>
             ) : (
               <>
+                {this.props.routeMethod.history.push("/")}
                 로그인이 필요합니다.
                 <LoginLink />
               </>

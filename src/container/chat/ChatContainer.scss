@@ -91,7 +91,6 @@ button:hover:after {
   padding-bottom: 1.5vh;
   text-align: center;
   background: $g-chat-left-title;
-  float: left;
   position: relative;
   @include box-shadow;
 }
@@ -163,7 +162,7 @@ button:hover:after {
 
 .g_chat_all .g_chat_main .g_time {
   font-size: 0.7em;
-  margin-top: 2.9em;
+  margin-top: 1.7em;
 }
 
 .g_chat_all .g_chat_main .g_message_area .g_other {
@@ -178,28 +177,40 @@ button:hover:after {
   @include animate(leftIn);
 }
 
+.g_chat_all .g_chat_main .g_message_area .g_system {
+  background: $g-chat-system-background;
+  max-width: 70vh;
+  width: 100%;
+  text-align: center;
+  font-size: 1em;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  margin-left: auto;
+  margin-right: auto;
+  @include animate(slideUp);
+}
+
+
 .g_chat_all .g_bottom_area {
   width: 100%;
   height: 20vh;
   position: relative;
-  float: right;
 }
 
 .g_chat_all .g_bottom_area .g_send_area {
-  width: calc(15% - 0.24em);
-  height: 20.5vh;
+  width: calc(14.95% - 0.20em);
+  height: 100%;
   position: relative;
   float: right;
 }
 
 .g_chat_all .g_bottom_area .g_send_area>button {
   border: 0;
-  display: table-caption;
-  font-size: 0.8em;
+  display: block;
   background: $g-chat-right-send;
   color: #fff;
   position: relative;
-  border-radius: 0.5em;
+  border-radius: 0 0.5em 0.5em 0;
 
   font-size: 1.2em;
   width: 100%;
@@ -241,12 +252,12 @@ button:hover:after {
 }
 
 .g_chat_all .g_bottom_area>input {
-  width: 85%;
-  height: 20vh;
+  width: calc(84.95%);
+  height: 100%;
   float: left;
   position: relative;
-  border-style: solid;
-  border-width: 0.05em 0.05em 0.05em 0.05em;
+  border: 0.05em black solid;
+  border-radius: 0.5em 0 0 0.5em;
 }
 
 @media only screen and (max-width:768px) {
@@ -280,7 +291,7 @@ button:hover:after {
 
   .g_chat_all .g_bottom_area .g_send_area {
     width: calc(20% - 0.22em);
-    height: 20.5vh;
+    height: 100%;
     position: relative;
     float: right;
     background: $g-chat-background;

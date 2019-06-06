@@ -12,13 +12,19 @@ class Router extends Component {
     super(props);
     this.state = {
       token: "",
-      nickname: ""
+      nickname: "",
+      who: ""
     };
     this.handleToken = this.handleToken.bind(this);
+    this.handleWho = this.handleWho.bind(this);
   }
 
   handleToken(value) {
     this.setState({ token: value.token, nickname: value.nickname });
+  }
+
+  handleWho(value) {
+    this.setState({ who: value });
   }
 
   render() {
@@ -51,6 +57,7 @@ class Router extends Component {
                 routeMethod={routeMethod}
                 token={this.state.token}
                 nickname={this.state.nickname}
+                handleWho={this.handleWho}
               />
             )}
           />
@@ -62,6 +69,7 @@ class Router extends Component {
                 routeMethod={routeMethod}
                 token={this.state.token}
                 nickname={this.state.nickname}
+                who={this.state.who}
               />
             )}
           />
