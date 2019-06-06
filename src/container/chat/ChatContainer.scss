@@ -28,13 +28,14 @@
 }
 
 .g_chat_all .g_header .g_leave>button {
+  display: table-caption;
   font-size: 0.8em;
-
-  background: $g-chat-background;
+  background: $g-chat-header-leave;
   color: #fff;
-  border: none;
+  border: 2px solid white;
   position: relative;
-  height: 100%;
+  height: 50%;
+  border-radius: 0.5em;
 
   cursor: pointer;
   transition: 800ms ease all;
@@ -44,6 +45,8 @@
 .g_chat_all .g_header .g_leave>button:hover {
   background: #fff;
   color: $g-chat-background;
+  transition: 400ms ease all;
+  border: 2px solid $g-chat-background;
 }
 
 .g_chat_all .g_header .g_leave>button:before,
@@ -96,7 +99,7 @@ button:hover:after {
 .g_chat_all .g_left_area .g_list_area {
   float: left;
   width: 100%;
-  height: 82vh;
+  height: 84vh;
   background: #eee;
   overflow-y: auto;
   overflow-x: hidden;
@@ -146,13 +149,16 @@ button:hover:after {
 }
 
 .g_chat_all .g_chat_main .g_message_area .g_text {
+  margin-top: 0.2em;
+  word-break: break-all;
+  max-width: 50%;
   color: white;
   font-size: 1.2em;
   background-color: $g-chat-text-background;
-  border-style: solid;
   border-radius: 0.8em;
-  padding: 0.5em 1em 0.5em 1em;
+  padding: 0.2em 1em;
   clear: both;
+  @include box-shadow;
 }
 
 .g_chat_all .g_chat_main .g_time {
@@ -184,17 +190,19 @@ button:hover:after {
   height: 20.5vh;
   position: relative;
   float: right;
-  background: $g-chat-background;
 }
 
 .g_chat_all .g_bottom_area .g_send_area>button {
+  border: 0;
+  display: table-caption;
+  font-size: 0.8em;
+  background: $g-chat-right-send;
+  color: #fff;
+  position: relative;
+  border-radius: 0.5em;
+
   font-size: 1.2em;
   width: 100%;
-
-  background: $g-chat-background;
-  color: #fff;
-  border: none;
-  position: relative;
   height: 100%;
 
   cursor: pointer;

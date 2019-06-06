@@ -1,8 +1,18 @@
+$gradation : linear-gradient(15deg, #001b94, #000099);
+$gradation2 : linear-gradient(15deg, #001261, #000080);
+$gradation3 : linear-gradient(345deg, #000A37, #000080);
+
+$gray-gradation:linear-gradient(15deg, #848484, #585858);
+
 $g-chat-background:#000080;
-$g-chat-header:linear-gradient(15deg, #0B0B3B, $g-chat-background);
-$g-chat-left-title:linear-gradient(15deg, #848484, #585858);
+$g-chat-header:$gradation2;
+$g-chat-header-leave: rgba(0, 0, 128, 0.5);
+
+$g-chat-left-title:$gray-gradation;
 $g-chat-left-title-color:white;
-$g-chat-left-list-hover:linear-gradient(15deg, $g-chat-background, #0404B4);
+$g-chat-left-list-hover:#777777;
+
+$g-chat-right-send: #000080;
 
 $g-chat-text-background :#848484;
 
@@ -18,6 +28,12 @@ $g-chat-text-background :#848484;
   animation-name: $animation-name;
   animation-duration: 1s;
   animation-iteration-count: 1; //infinite;
+}
+
+@mixin animateInfinite($animation-name) {
+  animation-name: $animation-name;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
 }
 
 @keyframes slideUp {
@@ -39,6 +55,16 @@ $g-chat-text-background :#848484;
 
   to {
     transform: scale(5);
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  from {
+    transform: rotate(360deg);
   }
 }
 
