@@ -229,7 +229,11 @@ class ChatContainer extends Component {
           >
             {this.state.token ? (
               <>
-                안녕하세요 {this.state.nickname}님 여기는 공용 채팅 공간입니다.
+                <div className="g_text g_system">
+                  안녕하세요 {this.state.nickname}님 여기는 공용 채팅
+                  공간입니다.
+                </div>
+
                 {this.state.chats.reduce((result, msg, i, initial) => {
                   return [
                     ...result,

@@ -276,13 +276,15 @@ class PrivateChatConatiner extends Component {
               this.messagesEnd = el;
             }}
           >
+            <div className="p_text p_system">
+              안녕하세요 {this.state.nickname}님 개인 채팅 공간입니다.
+            </div>
             {this.state.token ? (
               this.state.target !== "" ? (
                 <>
-                  <div>
-                    안녕하세요 {this.state.nickname}님 개인 채팅 공간입니다.
+                  <div className="p_text p_system">
+                    현재 대화 상대 : {this.state.target}
                   </div>
-                  <div>현재 대화 상대 : {this.state.target}</div>
                   {this.state.chats[this.state.target].reduce(
                     (result, msg, i, initial) => {
                       return [
@@ -349,7 +351,7 @@ class PrivateChatConatiner extends Component {
                   )}
                 </>
               ) : (
-                "대화할 상대를 골라주세요."
+                <div className="p_text p_system">대화할 상대를 골라주세요.</div>
               )
             ) : (
               <>
