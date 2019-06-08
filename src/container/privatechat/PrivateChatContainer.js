@@ -279,7 +279,9 @@ class PrivateChatConatiner extends Component {
             {this.state.token ? (
               this.state.target !== "" ? (
                 <>
-                  <div>안녕하세요 {this.state.nickname}님 개인 채팅 공간</div>
+                  <div>
+                    안녕하세요 {this.state.nickname}님 개인 채팅 공간입니다.
+                  </div>
                   <div>현재 대화 상대 : {this.state.target}</div>
                   {this.state.chats[this.state.target].reduce(
                     (result, msg, i, initial) => {
