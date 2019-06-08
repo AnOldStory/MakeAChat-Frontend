@@ -6,6 +6,8 @@ import config from "_variable";
 
 import "./JoinContainer.scss";
 
+import check_box from "img/check-box.png";
+
 class JoinContainer extends Component {
   constructor(props) {
     super(props);
@@ -165,13 +167,13 @@ class JoinContainer extends Component {
             <div className="check-box">
               <br />
               <p>
-                <img src="img/check-box.png" alt="img" /> 1:1 Chat
+                <img src={check_box} alt="img" /> 1:1 Chat
               </p>
               <p>
-                <img src="img/check-box.png" alt="img" /> Group Message
+                <img src={check_box} alt="img" /> Group Message
               </p>
               <p>
-                <img src="img/check-box.png" alt="img" /> Modern UI
+                <img src={check_box} alt="img" /> Modern UI
               </p>
             </div>
           </div>

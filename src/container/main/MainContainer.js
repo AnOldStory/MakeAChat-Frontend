@@ -5,6 +5,9 @@ import LoginLink from "component/LoginLink";
 
 import "./MainContainer.scss";
 
+import main_font from "img/main_font.jpg";
+import tablet from "img/tablet.jpg";
+
 class MainContainer extends Component {
   componentDidMount() {
     console.log("Main");
@@ -23,13 +26,8 @@ class MainContainer extends Component {
         <main>
           <div className="container">
             <div id="font">
-              <img
-                src="img/main_font.jpg"
-                alt="main_font"
-                width="75%"
-                height="90%"
-              />
-              <img src="img/tablet.jpg" alt="tablet" width="22%" height="60%" />
+              <img src={main_font} alt="main_font" width="75%" height="90%" />
+              <img src={tablet} alt="tablet" width="22%" height="60%" />
             </div>
           </div>
         </main>
