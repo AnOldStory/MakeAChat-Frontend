@@ -17,7 +17,8 @@ class ChatContainer extends Component {
       text: "",
       err: "",
       chats: [],
-      members: []
+      members: [],
+      enter: 0
     };
     this.handlePush = this.handlePush.bind(this);
     this.handleResponse = this.handleResponse.bind(this);
@@ -56,6 +57,7 @@ class ChatContainer extends Component {
   }
 
   handlePush() {
+    console.log(this.state.text);
     if (this.state.text.trim().length > 0) {
       this.socket.emit(
         "chat-push",
@@ -65,7 +67,8 @@ class ChatContainer extends Component {
         })
       );
       this.setState({
-        text: ""
+        text: "",
+        enter: 1
       });
     }
   }
@@ -117,8 +120,13 @@ class ChatContainer extends Component {
   }
 
   handleEnter(e) {
-    if (e.key === "Enter" && this.state.token) {
+    if (e.key === "Enter" && this.state.token && this.state.enter !== 1) {
       this.handlePush();
+    } else if (this.state.enter === 1) {
+      this.setState({
+        text: "",
+        enter: 0
+      });
     }
   }
 
@@ -302,7 +310,7 @@ class ChatContainer extends Component {
               </>
             ) : (
               <>
-                {this.props.routeMethod.history.push("/")}
+                {this.props.routeMethod.history.push("/login")}
                 로그인이 필요합니다.
                 <LoginLink />
               </>

@@ -73,10 +73,10 @@ class PrivateChatConatiner extends Component {
           text: this.state.text.trim()
         })
       );
-      this.setState({
-        text: ""
-      });
     }
+    this.setState({
+      text: ""
+    });
   }
 
   handleValid() {
@@ -355,7 +355,7 @@ class PrivateChatConatiner extends Component {
               )
             ) : (
               <>
-                {this.props.routeMethod.history.push("/")}
+                {this.props.routeMethod.history.push("/login")}
                 로그인이 필요합니다.
                 <LoginLink />
               </>
