@@ -19,7 +19,8 @@ class PrivateChatConatiner extends Component {
       who: this.props.who,
       lists: [],
       chats: {},
-      target: ""
+      target: "",
+      enter: 0
     };
     this.handleEnter = this.handleEnter.bind(this);
     this.handlePush = this.handlePush.bind(this);
@@ -58,8 +59,13 @@ class PrivateChatConatiner extends Component {
     }
   }
   handleEnter(e) {
-    if (e.key === "Enter" && this.state.token) {
+    if (e.key === "Enter" && this.state.token && this.state.enter !== 1) {
       this.handlePush();
+    } else if (this.state.enter === 1) {
+      this.setState({
+        text: "",
+        enter: 0
+      });
     }
   }
 
@@ -73,10 +79,11 @@ class PrivateChatConatiner extends Component {
           text: this.state.text.trim()
         })
       );
+      this.setState({
+        text: "",
+        enter: 1
+      });
     }
-    this.setState({
-      text: ""
-    });
   }
 
   handleValid() {

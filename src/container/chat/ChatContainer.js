@@ -57,7 +57,6 @@ class ChatContainer extends Component {
   }
 
   handlePush() {
-    console.log(this.state.text);
     if (this.state.text.trim().length > 0) {
       this.socket.emit(
         "chat-push",
