@@ -23,6 +23,7 @@ class PrivateChatConatiner extends Component {
       enter: 0
     };
     this.handleEnter = this.handleEnter.bind(this);
+    this.handleValidEnter = this.handleValidEnter.bind(this);
     this.handlePush = this.handlePush.bind(this);
     this.handleValid = this.handleValid.bind(this);
     this.handleButtonValid = this.handleButtonValid.bind(this);
@@ -58,6 +59,7 @@ class PrivateChatConatiner extends Component {
       this.handleValid();
     }
   }
+
   handleEnter(e) {
     if (e.key === "Enter" && this.state.token && this.state.enter !== 1) {
       this.handlePush();
@@ -66,6 +68,12 @@ class PrivateChatConatiner extends Component {
         text: "",
         enter: 0
       });
+    }
+  }
+
+  handleValidEnter(e) {
+    if (e.key === "Enter" && this.state.token) {
+      this.handleValid();
     }
   }
 
@@ -91,7 +99,7 @@ class PrivateChatConatiner extends Component {
       "get-valid",
       JSON.stringify({
         token: this.state.token,
-        nickname: this.state.who
+        nickname: this.state.who.trim()
       })
     );
   }
@@ -183,7 +191,7 @@ class PrivateChatConatiner extends Component {
             lists: lists
           });
           result[msg.from] = [
-            { nickname: "시스템", text: "채팅의 시작입니다." }
+            { nickname: "시스템", text: "채팅의 시작입니다.", time: "system" }
           ];
         }
         result[msg.from].push(msg);
@@ -271,6 +279,7 @@ class PrivateChatConatiner extends Component {
                 name="who"
                 onChange={this.handleTyping}
                 value={this.state.who}
+                onKeyDown={this.handleValidEnter}
               />
               <button onClick={this.handleValid}>SEARCH</button>
             </div>
