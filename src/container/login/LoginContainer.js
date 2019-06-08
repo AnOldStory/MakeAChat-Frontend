@@ -20,6 +20,7 @@ class LoginContainer extends Component {
     this.handleLogin = this.handleLogin.bind(this);
     this.handleJoin = this.handleJoin.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleMain = this.handleMain.bind(this);
   }
 
   componentDidMount() {
@@ -92,13 +93,19 @@ class LoginContainer extends Component {
     });
   }
 
+  handleMain() {
+    this.props.routeMethod.history.push("/");
+  }
+
   render() {
     return (
       <div className="login_container">
         <>
           {this.state.loading ? <Loading /> : ""}
           <div className="left">
-            <div className="logo">MakeAChat</div>
+            <div className="logo pointer" onClick={this.handleMain}>
+              MakeAChat
+            </div>
             <br />
             <br />
             <div className="announce">
@@ -125,10 +132,10 @@ class LoginContainer extends Component {
               />
             </div>
             <div className="err">{this.state.error}</div>
-            <div className="login_button" onClick={this.handleLogin}>
+            <div className="login_button pointer" onClick={this.handleLogin}>
               Login
             </div>
-            <div className="signup_button" onClick={this.handleJoin}>
+            <div className="signup_button pointer" onClick={this.handleJoin}>
               Sign Up
             </div>
           </div>

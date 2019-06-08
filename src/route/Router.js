@@ -31,7 +31,6 @@ class Router extends Component {
     return (
       <BrowserRouter>
         <Switch>
-          <Route exact path="/" component={MainContainer} />
           <Route
             exact
             path="/join"
@@ -73,6 +72,7 @@ class Router extends Component {
               />
             )}
           />
+          <Route path="/" component={MainContainer} />
         </Switch>
       </BrowserRouter>
     );

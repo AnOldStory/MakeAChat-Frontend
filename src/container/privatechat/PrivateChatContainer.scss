@@ -77,7 +77,7 @@ button:hover:after {
 .p_chat_all .p_left_area {
   float: left;
   width: 15%;
-  height: 75vh;
+  height: 90vh;
 }
 
 .p_chat_all .p_left_area .p_user {
@@ -99,7 +99,7 @@ button:hover:after {
 .p_chat_all .p_left_area .p_list_area {
   float: left;
   width: 100%;
-  height: 79vh;
+  height: 65vh;
   background: #eee;
   overflow-y: auto;
   overflow-x: hidden;
@@ -199,7 +199,7 @@ button:hover:after {
 }
 
 .p_chat_all .p_bottom_area .p_send_area {
-  width: calc(14.95% - 0.20em);
+  width: 15%;
   height: 100%;
   position: relative;
   float: right;
@@ -253,70 +253,31 @@ button:hover:after {
 }
 
 .p_chat_all .p_bottom_area>input {
-  width: calc(84.95%);
-  height: 100%;
+  width: calc(85% - 0.1em);
+  padding: 0;
+  height: calc(100% - 0.1em);
   float: left;
   position: relative;
   border: 0.05em black solid;
   border-radius: 0.5em 0 0 0.5em;
 }
 
-@media only screen and (max-width:768px) {
-  .p_left_area {
-    display: none;
-  }
-
-  .p_chat_all .p_left_area .p_list_area {
-    display: none;
-  }
-
-  .p_chat_all .p_left_area .p_user {
-    display: none;
-  }
-
-  .p_chat_all .p_left_area .p_list_area .p_list {
-    display: none;
-  }
-
-  .p_chat_all .p_chat_main {
-    width: 100%;
-  }
-
-  .p_chat_all .p_bottom_area {
-    width: 100%;
-  }
-
-  .p_chat_all .p_bottom_area>input {
-    width: 80%;
-  }
-
-  .p_chat_all .p_bottom_area .p_send_area {
-    width: calc(20% - 0.22em);
-    height: 100%;
-    position: relative;
-    float: right;
-    background: $g-chat-background;
-  }
-}
-
-.messagesEnd {
-  float: left;
-}
-
 .p_chat_all .p_list_area .p_search {
   width: 15%;
-  height: 5.6em;
-  border: 2px;
-  border-width: 2px;
+  height: 20vh;
   background: #eee;
+  bottom: 0;
   position: fixed;
-  bottom: 0.1em;
 }
 
 .p_chat_all .p_list_area .p_search>input {
-  width: 97%;
-  height: 2em;
+  width: calc(100% - 0.1em);
+  height: calc(8vh - 0.1em);
   position: relative;
+  border: 0.05em black solid;
+  border-radius: 0 0.5em 0 0;
+  border-style: solid;
+  padding: 0;
 }
 
 .p_chat_all .p_list_area .p_search>button {
@@ -328,11 +289,12 @@ button:hover:after {
   color: #fff;
   border: none;
   position: relative;
-  height: 3em;
+  height: 12vh;
 
   cursor: pointer;
   transition: 800ms ease all;
   outline: none;
+  padding: 0;
 }
 
 .p_chat_all .p_list_area .p_search>button:hover {
@@ -363,4 +325,72 @@ button:after {
 button:hover:after {
   width: 100%;
   transition: 800ms ease all;
+}
+
+@media only screen and (max-width:768px) {
+  .p_chat_all .p_left_area {
+    width: 100%;
+    height: 5vh;
+  }
+
+  .p_chat_all .p_left_area .p_list_area {
+    height: 5vh;
+  }
+
+  .p_chat_all .p_left_area .p_list_area .p_search {
+    position: relative;
+    width: 100%;
+    height: 5vh;
+  }
+
+  .p_chat_all .p_left_area .p_list_area .p_search>input {
+    width: calc(80% - 0.1em);
+    height: calc(5vh - 0.1em);
+    border-radius: 0 0 0 0.5em;
+  }
+
+  .p_chat_all .p_left_area .p_list_area .p_search>button {
+    width: 20%;
+    height: 5vh;
+    float: right;
+    font-size: 0.8em;
+  }
+
+  .p_chat_all .p_left_area .p_user {
+    display: none;
+  }
+
+  .p_chat_all .p_left_area .p_list_area .p_list {
+    display: none;
+  }
+
+  .p_chat_all .p_chat_main {
+    width: 100%;
+    height: 68vh;
+  }
+
+  .p_chat_all .p_chat_main .p_message_area {
+    height: 68vh;
+  }
+
+  .p_chat_all .p_bottom_area {
+    width: 100%;
+    height: 17vh;
+  }
+
+  .p_chat_all .p_bottom_area>input {
+    width: calc(80% - 0.1em);
+  }
+
+  .p_chat_all .p_bottom_area .p_send_area {
+    width: 20%;
+    height: 100%;
+    position: relative;
+    float: right;
+    background: $g-chat-background;
+  }
+}
+
+.messagesEnd {
+  float: left;
 }

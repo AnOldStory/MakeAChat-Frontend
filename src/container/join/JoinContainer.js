@@ -19,6 +19,8 @@ class JoinContainer extends Component {
     this.handleEnter = this.handleEnter.bind(this);
     this.handleSignup = this.handleSignup.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleLogin = this.handleLogin.bind(this);
+    this.handleMain = this.handleMain.bind(this);
   }
 
   componentDidMount() {
@@ -86,13 +88,23 @@ class JoinContainer extends Component {
     });
   }
 
+  handleLogin() {
+    this.props.routeMethod.history.push("/login");
+  }
+
+  handleMain() {
+    this.props.routeMethod.history.push("/");
+  }
+
   render() {
     return (
       <div className="join_container">
         <>
           {this.state.loading ? <Loading /> : ""}
           <div className="left">
-            <div className="logo">MakeAChat</div>
+            <div className="logo pointer" onClick={this.handleMain}>
+              MakeAChat
+            </div>
             <br />
             <br />
             <div className="announce">
@@ -134,8 +146,14 @@ class JoinContainer extends Component {
               <br />
             </div>
             <div className="err">{this.state.error}</div>
-            <div className="signup_button" onClick={this.handleSignup}>
+            <div className="signup_button pointer" onClick={this.handleSignup}>
               회원가입
+            </div>
+            <div className="BackToLogin">
+              이미 회원이신가요?
+              <u className="pointer" onClick={this.handleLogin}>
+                로그인하기
+              </u>
             </div>
           </div>
 

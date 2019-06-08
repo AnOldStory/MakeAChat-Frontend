@@ -30,11 +30,6 @@ $p-chat-right-send: #000080;
 $p-chat-text-background :#848484;
 $p-chat-system-background :#666666;
 
-
-* {
-  transition: all 1s;
-}
-
 @mixin box-shadow() {
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 }

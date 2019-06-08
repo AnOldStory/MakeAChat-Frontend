@@ -44,7 +44,6 @@ body {
 .login_input {
   border-radius: 12px;
   width: 70%;
-  margin-bottom: 20px;
 }
 
 input[type=text]:focus,
@@ -166,8 +165,20 @@ input[type=password] {
 
 .err {
   font-family: helvetica;
-  margin: auto;
-  margin-bottom: 1.2vh;
+  margin-top: 1vh;
+  margin-bottom: 1vh;
   font-size: 1vw;
   color: red;
+}
+
+.BackToLogin {
+  position: relative;
+  top: 20%;
+  margin: auto;
+  color: white;
+  font-family: Helvetica;
+}
+
+.pointer {
+  cursor: pointer;
 }
