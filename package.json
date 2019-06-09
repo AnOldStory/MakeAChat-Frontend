@@ -2,6 +2,24 @@
   "name": "makeachat-frontend",
   "version": "0.1.0",
   "private": true,
+  "main": "public/electron.js",
+  "homepage": "./",
+  "author": {
+    "name": "AnOldStory",
+    "url": "https://github.com/AnOldStory"
+  },
+  "build": {
+    "appId": "com.github-anoldstory.MakeAChat",
+    "productName": "MakeAChat",
+    "copyright": "Copyright © 2019 ${author}",
+    "files": [
+      "build/**/*",
+      "node_modules/**/*"
+    ],
+    "directories": {
+      "buildResources": "public"
+    }
+  },
   "dependencies": {
     "node-sass": "^4.12.0",
     "react": "^16.8.6",
@@ -30,5 +48,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "electron": "^5.0.3",
+    "electron-builder": "^20.43.0",
+    "typescript": "^3.5.1"
   }
 }
