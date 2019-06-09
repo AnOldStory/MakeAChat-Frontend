@@ -13,8 +13,7 @@ function createWindow() {
   	titleBarStyle:'hidden',
     width: 800,
     height: 600,
-    icon:path.join(__dirname,"/../build/makeachat.png"),
-    skipTaskbar: true,
+    icon:path.join(__dirname,"/../build/icon.png"),
     toolbar: false
   });
 
