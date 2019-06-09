@@ -225,6 +225,7 @@ class ChatContainer extends Component {
                 {name}
               </div>
             ))}
+            <div className="g_err">{this.state.err}</div>
           </div>
         </div>
         <div className="g_chat_main">

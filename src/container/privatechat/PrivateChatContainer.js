@@ -212,7 +212,8 @@ class PrivateChatConatiner extends Component {
         ];
         this.setState({
           chats: result,
-          target: this.state.who
+          target: this.state.who,
+          err: ""
         });
         this.socket.emit(
           "get-chat-private",
@@ -273,7 +274,7 @@ class PrivateChatConatiner extends Component {
                 {msg}
               </div>
             ))}
-            <div className="err">{this.state.err}</div>
+            <div className="p_err">{this.state.err}</div>
             <div className="p_search">
               <input
                 name="who"
