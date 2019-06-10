@@ -10,10 +10,10 @@ let mainWindow;
 function createWindow() {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-  	titleBarStyle:'hidden',
+    titleBarStyle: "hidden",
     width: 800,
     height: 600,
-    icon:path.join(__dirname,"/../build/icon.png"),
+    icon: path.join(__dirname, "/../build/icon.png"),
     toolbar: false
   });
 
