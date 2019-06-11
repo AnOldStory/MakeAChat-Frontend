@@ -30,7 +30,7 @@
   - 로그인/회원가입 화면 css 작성
   - 깃 레포
 - Kim MinJi
-  - 메인 화면/ css 작성
+  - 메인 화면/로딩창 css 작성
 - Kim WonBae
   - 그룹/개인채팅 화면 css 작성
 - Yun SungJu
