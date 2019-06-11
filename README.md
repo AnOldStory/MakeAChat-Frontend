@@ -1,12 +1,6 @@
 # MakeAChat-FrontEnd
 
-<p align="center">
-  <img width="200" height="200" src="https://github.com/AnOldStory/MakeAChat-FrontEnd/blob/master/public/icon.png">
-</p>
 
-<p align="center">
-  <img width="700" height="400" src="https://github.com/AnOldStory/MakeAChat-FrontEnd/blob/master/public/appscreen.jpg">
-</p>
 
 ## License
 
