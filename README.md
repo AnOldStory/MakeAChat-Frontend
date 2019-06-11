@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <img width="450" height="200" src="https://github.com/AnOldStory/MakeAChat-FrontEnd/blob/master/public/appscreen.jpg">
+  <img width="700" height="400" src="https://github.com/AnOldStory/MakeAChat-FrontEnd/blob/master/public/appscreen.jpg">
 </p>
 
 ## License
