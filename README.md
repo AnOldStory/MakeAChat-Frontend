@@ -28,7 +28,7 @@
   - 리액트 적용
 - Ma MinJi
   - 로그인/회원가입 화면 css 작성
-  - 깃 레포
+  - https://github.com/akalswl14/MakeAChat_Carly
 - Kim MinJi
   - 메인 화면/로딩창 css 작성
 - Kim WonBae
